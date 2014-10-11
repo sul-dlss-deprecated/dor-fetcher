@@ -1,0 +1,14 @@
+= dor-fetcher
+
+A gem to make sure of a dor-fetcher-service and perform calls to that service over a Restful API
+
+== To work with the gem locally 
+
+    clone via git
+    start a local copy of dor-fetcher-services listening on port 3000
+    load this gem into IRB
+    make calls
+    
+==  To build and install into local IRB
+    gem build dor-fetcher.gemspec 
+    gem install ./FILENAME_OUTPUT_FROM_BUILD_COMMAND
