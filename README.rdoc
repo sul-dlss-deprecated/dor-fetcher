@@ -54,15 +54,24 @@ The above return a JSON string of all members of the collection, unless you pass
 === Advanced Querying
 
 Use: df.query_api(base, druid, params)
-To produce the call: http://SERVICE-URL/BASE/DRUID?PARAM1=FOO?PARAM2=bar?etc
+To produce the call: 
+    http://SERVICE-URL/BASE/DRUID?PARAM1=FOO?PARAM2=bar?etc
 
 == To Develop This Gem Locally:
 
-    clone via git
-    start a local copy of dor-fetcher-services listening on port 3000
-    load this gem into IRB
-    make calls
-    
-==  To build and install into local IRB
+* Clone From Github, git clone https://github.com/sul-dlss/dor-fetcher
+* Create your feature branch, git checkout -b my-new-feature
+* Write code and tests
+* Ensure all the tests passes via rake spec (Pending)
+* Bump the version in the gemspec
+* Release via RubyGems
+
+== Building and Installing Locally
+
+In the gem directory:
+
     gem build dor-fetcher.gemspec 
-    gem install ./FILENAME_OUTPUT_FROM_BUILD_COMMAND
+    gem install ./DorFetcher-#.#.#.gem (Replace the # with the version of the gem built, the build command will display this in console)
+    irb
+    require 'dor-fetcher'
+    Do Stuff in IRB
