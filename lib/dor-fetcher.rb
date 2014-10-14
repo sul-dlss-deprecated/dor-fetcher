@@ -6,11 +6,12 @@ module DorFetcher
     
     @@supported_params = [:first_modified, :last_modified]
     @@count_only_param = "?rows=0"
+    @@default_service_url = 'http://127.0.0.1:3000'
     
-    
-    def initialize(service_url)
+    #Call me with {:service_url='http://SERVICEURL'}
+    def initialize options = {}
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
-      @service_url = service_url
+      @service_url = options[:service_url] || @@default_service_url
     end
     #options :count_only, :first_modified, :last_modified
     def get_collection(collection, params = {})
@@ -52,7 +53,7 @@ module DorFetcher
       begin
         resp = Net::HTTP.get_response(URI.parse(url))
       rescue
-        raise 'Connection Error with url #{url}' 
+        raise "Connection Error with url #{url}"
       end
       
       return resp.body.to_i if params[:count_only] == true
