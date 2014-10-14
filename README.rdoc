@@ -1,8 +1,62 @@
 = dor-fetcher
 
-A gem to make sure of a dor-fetcher-service and perform calls to that service over a Restful API
+This gem provides a basic wrapper for reaching the API of an instance of dor-fetcher-service: https://github.com/sul-dlss/dor-fetcher-service.  This ReadMe assumes your familiar with the RESTFUL API of dor-fetcher-service, its JSON return and are just looking to leverage that with this gem.  
 
-== To work with the gem locally 
+== Using This Gem
+
+Note: If you're in IRB or such the JSON will appear in its escaped form.
+
+* Add dor-fetcher to your Gemlist and require it where appriorate.
+* Initialize via df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE})
+** By default this will point to http://127.0.0.1:3000, so df = DorFetcher::Client.new will initialize with localhost as the url of the service.
+* Do things with df, such as df.list_all_apos
+
+== Doing Things With This Gem
+
+===Valid Parameters
+
+This can be passed anywhere you see params listed as an argument.  Past them in as a hash ({YOUR_STUFF}).  You do not need to include an empty hash if you have no parameters.  You can do df.get_count_for_apo(apo_druid) or df.get)_count_for_apo(apo, {:count_only=>true}) 
+
+* :count_only => true This returns just a count of the results.  Defaults to false.
+* :first_modified => 'String_of_Time_In_ISO8601_Format' This sets the first datetime that the object was modified, will default to the start of POSIX Time (Thursday, 1 Jan 1970).
+* :last_modified => 'String_of_Time_In_ISO8601_Format' This sets the last datetime that the object was modified, will default to tomorrow.  
+
+You do not both a :first_modified and a :last_modified, you can use one or both.  
+
+===A Note On The Druid: Prefix 
+
+You can pass your druid in as druid:PID or just PID.  dor-fetcher-service can handle both forms and this gem is just the messenger.  If we ever update dor-fetcher-service to require the druid: prefix and forget to update this README, obviously we will have a problem.  As such best practice is include the prefix on anything you plan on putting in production and supporting for a long period of time.
+
+=== Listing All of Something
+
+* Admin Policy Objects: df.list_all_apos
+* Collections: df.list_all_collections
+
+=== Getting The Counts of Something
+
+====Total Counts Of One Type
+
+* Admin Policy Objects: df.total_apo_count
+* Collections: df.total_collection_count
+
+====Total Counts Of Objects That Are Part of Something
+
+* Admin Policy Objects: df.get_count_for_apo(apo_druid, params)
+* Collection Objects: df.get_count_for_collection(collection_druid, params)
+
+===Getting The Members of Something
+
+* Admin Policy Objects: df.get_apo(apo_druid, params)
+* Collections: df.get_collection(collect_druid, params)
+
+The above return a JSON string of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_* methods
+
+=== Advanced Querying
+
+Use: df.query_api(base, druid, params)
+To produce the call: http://SERVICE-URL/BASE/DRUID?PARAM1=FOO?PARAM2=bar?etc
+
+== To Develop This Gem Locally:
 
     clone via git
     start a local copy of dor-fetcher-services listening on port 3000
