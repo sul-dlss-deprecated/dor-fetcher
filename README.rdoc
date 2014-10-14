@@ -8,7 +8,7 @@ Note: If you're in IRB or such the JSON will appear in its escaped form.
 
 * Add dor-fetcher to your Gemlist and require it where appriorate.
 * Initialize via df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE})
-** By default this will point to http://127.0.0.1:3000, so df = DorFetcher::Client.new will initialize with localhost as the url of the service.
+* By default this will point to http://127.0.0.1:3000, so df = DorFetcher::Client.new will initialize with localhost as the url of the service.
 * Do things with df, such as df.list_all_apos
 
 == Doing Things With This Gem
