@@ -60,8 +60,10 @@ To produce the call:
 
 == To Develop This Gem Locally:
 
-* Clone From Github, git clone https://github.com/sul-dlss/dor-fetcher
-* Create your feature branch, git checkout -b my-new-feature
+* Clone From Github
+    git clone https://github.com/sul-dlss/dor-fetcher
+* Create your feature branch
+    git checkout -b my-new-feature
 * Write code and tests
 * Ensure all the tests passes via rake spec (Pending)
 * Merge back into master
