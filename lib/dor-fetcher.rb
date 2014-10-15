@@ -1,4 +1,5 @@
 require 'net/http'
+require 'json'
 
 module DorFetcher
   
@@ -47,6 +48,16 @@ module DorFetcher
       return query_api('apo', '', {:count_only=>true})
     end
     
+    def druid_array(response)
+      return_list = []
+      j = JSON.parse(response)
+      j.keys.each do |key|
+        j[key].each do |item|
+          return_list << item['druid'] if item['druid'] != nil
+        end
+      end
+      return return_list
+    end
     
     def query_api(base, druid, params)
       url = "#{@service_url}/#{base}/#{druid}#{add_params(params)}"

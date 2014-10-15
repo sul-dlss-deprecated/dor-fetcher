@@ -58,7 +58,13 @@ The above returns a JSON string of all members of the collection, unless you pas
 Use: df.query_api(base, druid, params)
 To produce the call: 
     http://SERVICE-URL/BASE/DRUID?PARAM1=FOO?PARAM2=bar?etc
+    
+=== I Just Want An Array Of Druids
 
+Wrap any of the calls above in df.druid_array to produce just an array of druids.  This array will contain the druid prefix.  Example call:
+
+    df.druid_array(df.list_all_collections)
+    
 == To Develop This Gem Locally:
 
 * Clone From Github
@@ -66,7 +72,8 @@ To produce the call:
 * Create your feature branch
     git checkout -b my-new-feature
 * Write code and tests
-* Ensure all the tests passes via rake spec (Pending)
+* Ensure all the tests passes via
+    rspec spec
 * Merge back into master
 * Bump the version in the gemspec
 * Release via RubyGems
