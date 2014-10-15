@@ -7,15 +7,16 @@ This gem provides a basic wrapper for reaching the API of an instance of dor-fet
 Note: If you're in IRB or such the JSON will appear in its escaped form.
 
 * Add dor-fetcher to your Gemlist and require it where appriorate.
-* Initialize via df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE})
-* By default this will point to http://127.0.0.1:3000, so df = DorFetcher::Client.new will initialize with localhost as the url of the service.
+* Initialize via 
+    df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE'})
+* By default this will point to localhost:3000, so df = DorFetcher::Client.new with no URL will point there.
 * Do things with df, such as df.list_all_apos
 
 == Doing Things With This Gem
 
 ===Valid Parameters
 
-This can be passed anywhere you see params listed as an argument.  Past them in as a hash ({YOUR_STUFF}).  You do not need to include an empty hash if you have no parameters.  You can do df.get_count_for_apo(apo_druid) or df.get)_count_for_apo(apo, {:count_only=>true}) 
+This can be passed anywhere you see params listed as an argument.  Past them in as a hash ({YOUR_STUFF}).  You do not need to include an empty hash if you have no parameters.  You can do df.get_count_for_apo(apo_druid) or df.get_count_for_apo(apo, {:count_only=>true}), you don't need to do df.get_count_for_apo(apo_druid, {})
 
 * :count_only => true This returns just a count of the results.  Defaults to false.
 * :first_modified => 'String_of_Time_In_ISO8601_Format' This sets the first datetime that the object was modified, will default to the start of POSIX Time (Thursday, 1 Jan 1970).
@@ -49,7 +50,7 @@ You can pass your druid in as druid:PID or just PID.  dor-fetcher-service can ha
 * Admin Policy Objects: df.get_apo(apo_druid, params)
 * Collections: df.get_collection(collect_druid, params)
 
-The above return a JSON string of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_* methods
+The above returns a JSON string of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_OBJECT methods?
 
 === Advanced Querying
 
