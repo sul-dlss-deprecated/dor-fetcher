@@ -7,6 +7,7 @@ This gem provides a basic wrapper for reaching the API of an instance of dor-fet
 Note: If you're in IRB or such the JSON will appear in its escaped form.
 
 * Add dor-fetcher to your Gemlist and require it where appriorate.
+    gem 'dor-fetcher'
 * Initialize via 
     df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE'})
 * By default this will point to localhost:3000, so df = DorFetcher::Client.new with no URL will point there.
