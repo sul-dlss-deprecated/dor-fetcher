@@ -64,6 +64,7 @@ To produce the call:
 * Create your feature branch, git checkout -b my-new-feature
 * Write code and tests
 * Ensure all the tests passes via rake spec (Pending)
+* Merge back into master
 * Bump the version in the gemspec
 * Release via RubyGems
 
