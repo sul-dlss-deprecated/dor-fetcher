@@ -1,6 +1,6 @@
 = dor-fetcher
 
-This gem provides a basic wrapper for reaching the API of an instance of dor-fetcher-service: https://github.com/sul-dlss/dor-fetcher-service.  This ReadMe assumes your familiar with the RESTFUL API of dor-fetcher-service, its JSON return and are just looking to leverage that with this gem.  
+This gem provides a basic wrapper for reaching the API of an instance of dor-fetcher-service: https://github.com/sul-dlss/dor-fetcher-service.  This ReadMe assumes your familiar with the API of dor-fetcher-service, its JSON return and are just looking to leverage that with this gem.  
 
 == Using This Gem
 
