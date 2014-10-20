@@ -4,9 +4,7 @@ This gem provides a basic wrapper for reaching the API of an instance of dor-fet
 
 == Using This Gem
 
-Note: If you're in IRB or such the JSON will appear in its escaped form.
-
-* Add dor-fetcher to your Gemlist and require it where appriorate.
+* Add dor-fetcher to your Gemlist and require it where appropriate.
     gem 'dor-fetcher'
 * Initialize via 
     df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE'})
@@ -51,7 +49,7 @@ You can pass your druid in as druid:PID or just PID.  dor-fetcher-service can ha
 * Admin Policy Objects: df.get_apo(apo_druid, params)
 * Collections: df.get_collection(collect_druid, params)
 
-The above returns a JSON string of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_OBJECT methods?
+The above returns a hash of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_OBJECT methods?
 
 === Advanced Querying
 

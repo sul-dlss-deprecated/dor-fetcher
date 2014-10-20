@@ -50,12 +50,10 @@ module DorFetcher
     
     def druid_array(response)
       return_list = []
-      j = response.to_json
-      puts j.keys
+      j = response
       j.keys.each do |key|
         j[key].each do |item|
           return_list << item['druid'] if item['druid'] != nil
-          puts return_list
         end
       end
       return return_list
@@ -63,8 +61,6 @@ module DorFetcher
     
     def query_api(base, druid, params)
       url = "#{@service_url}/#{base}/#{druid}#{add_params(params)}"
-      #url = @service_url + "/" + base + "/" + druid + add_params(params)
-      puts url
       
       begin
         resp = Net::HTTP.get_response(URI.parse(url))
@@ -73,7 +69,7 @@ module DorFetcher
       end
       
       return resp.body.to_i if params[:count_only] == true
-      return resp.body.to_json
+      return JSON[resp.body]
       
     end
     
