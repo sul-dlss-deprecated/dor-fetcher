@@ -91,5 +91,19 @@ describe DorFetcher::Client do
     end
     
   end
+  
+  describe "Query API" do
+    before(:each) do
+      @df = DorFetcher::Client.new
+    end
+    
+    it "should be able to return a count of objects governed by an APO bounded by datetime parameters" do
+      druid = "druid:qv648vd4392"
+      base = "apo"
+      params = {:count_only=>true, :first_modified=>"2014-01-01T05:06:06Z", :last_modified=>"2014-10-19T05:06:06Z"}
+      expect(@df.query_api(base, druid, params)).to eq(11)
+    end
+  end
+ 
  
 end

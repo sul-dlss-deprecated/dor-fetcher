@@ -9,7 +9,11 @@ module DorFetcher
     @@count_only_param = "?rows=0"
     @@default_service_url = 'http://127.0.0.1:3000'
     
-    #Call me with {:service_url='http://SERVICEURL'}
+    #Create a new instance of DorFetcher::Client
+    #@param options [Hash] Currently supports only :service_url, the base 
+    #url for API queries.  Defaults to http://127.0.0.1:3000
+    #@example
+    #    df = DorFetcher::Client.new({:service_url='http://SERVICEURL'})
     def initialize options = {}
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
@@ -93,7 +97,14 @@ module DorFetcher
       end
       return return_list
     end
-    
+    #Query a RESTful API and return the JSON result as a Hash
+    #@param base [String] The name of controller of the Rails App you wish to
+    #route to
+    #@param druid [String] The druid/pid of the object you wish to query,
+    #or empty string for no specific druid
+    #@param params [Hash] we expect :count_only or any of @@supported_params
+    #@return [Hash] Hash of all objects governed by the APO including    
+    #pid/druid, title, date last modified, and count
     def query_api(base, druid, params)
       url = "#{@service_url}/#{base}/#{druid}#{add_params(params)}"
       
@@ -104,8 +115,7 @@ module DorFetcher
       end
       
       return resp.body.to_i if params[:count_only] == true
-      return JSON[resp.body]
-      
+      return JSON[resp.body] #Convert the response JSON to a Ruby Hash
     end
     
     #Transform a parameter hash into a RESTful API parameter format
@@ -118,7 +128,11 @@ module DorFetcher
       #Handle Count Only
       args_string << @@count_only_param if input_params[:count_only] == true
       
-      count = 0
+      #If we did not add in a rows=0 param, args_string will have a size of 
+      #zero
+      #If we did add in a rows=0 param, this will set count to greater than 
+      #zero
+      count = args_string.size
       @@supported_params.each do |p|
         operator = "?"
         operator = "&" if count > 0
@@ -137,6 +151,8 @@ module DorFetcher
       return params
     end
     
+    #Get the Base URL this instance will run RESTful API calls against
+    #@return [String] the url
     def service_url
       return @service_url
     end

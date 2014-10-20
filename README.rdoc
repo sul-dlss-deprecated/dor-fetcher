@@ -55,7 +55,7 @@ The above returns a hash of all members of the collection, unless you pass in :c
 
 Use: df.query_api(base, druid, params)
 To produce the call: 
-    http://SERVICE-URL/BASE/DRUID?PARAM1=FOO?PARAM2=bar?etc
+    http://SERVICE-URL/BASE/DRUID?PARAM1=foo?PARAM2=bar?etc
     
 === I Just Want An Array Of Druids
 
