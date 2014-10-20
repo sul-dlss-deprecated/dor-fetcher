@@ -10,4 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    = "http://www.stanford.edu"
   s.license     = "Apache-2.0"
   s.add_development_dependency "rspec"
+  s.add_development_dependency "vcr"
+  s.add_development_dependency "webmock"
 end

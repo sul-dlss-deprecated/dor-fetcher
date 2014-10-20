@@ -70,6 +70,8 @@ Wrap any of the calls above in df.druid_array to produce just an array of druids
 * Create your feature branch
     git checkout -b my-new-feature
 * Write code and tests
+* If writing tests that rely on network calls you need to make a VCR cassette for them or it will fail.
+* If old cassettes are broken, remove them from spec/fixtures/vcr_casettes, bring up a local instance of dor-fetcher-service and new ones will automatically record
 * Ensure all the tests passes via
     bundle exec rspec
 * Merge back into master
