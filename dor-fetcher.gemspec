@@ -8,5 +8,6 @@ Gem::Specification.new do |s|
   s.email       = ['carrickr@stanford.edu', 'laneymcg@stanford.edu']
   s.files       = Dir.glob("lib/**/*") + Dir.glob("config/**/*") + Dir.glob('bin/*')
   s.homepage    = "http://www.stanford.edu"
+  s.license     = "Apache-2.0"
   s.add_development_dependency "rspec"
 end
