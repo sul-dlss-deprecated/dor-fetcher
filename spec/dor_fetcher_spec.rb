@@ -48,5 +48,26 @@ describe DorFetcher::Client do
       expect(df.druid_array(input)).to eq(expected_output)
     end
   end
+  
+  describe "Calling RESTful API and processing output" do
+    before(:each) do
+      @df = DorFetcher::Client.new
+    end
+    
+    it "should return a Hash of all items in a collection and the collection object" do
+      expected_result = JSON['{"collection":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":["The Revs Institute for Automotive Research, Inc."]},{"druid":"druid:wy149zp6932","latest_change":"2014-06-06T05:06:06Z","title":["The George Phillips Collection of the Revs Institute"]},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":["TThe Bruce R. Craig Collection of the Revs Institutee"]}],"item":[{"druid":"druid:bb001zc5754","latest_change":"2014-06-06T05:06:06Z","title":["French Grand Prix and 12 Hour Rheims: 1954"]},{"druid":"druid:bb004bn8654","latest_change":"2014-06-06T05:06:06Z","title":[" Bryar 250 Trans-American: 1966"]},{"druid":"druid:bb013sq9803","latest_change":"2014-06-06T05:06:06Z","title":["Swedish Grand Prix: 1976"]},{"druid":"druid:bb014bd3784","latest_change":"2014-06-06T05:06:06Z","title":["Bridgehampton Double 500: 1964"]},{"druid":"druid:bb023nj3137","latest_change":"2014-06-06T05:06:06Z","title":["Snetterton Vanwall Trophy: 1958"]},{"druid":"druid:bb027yn4436","latest_change":"2014-06-06T05:06:06Z","title":["Crystal Palace BARC: 1954"]},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":["Tourist Trophy Goodwood: 1959"]},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":["Permatex 300 NASCAR Race: 1968"]}],"counts":[{"collection":3},{"item":8},{"total_count":11}]}']
+      expect(@df.get_collection('nt028fd5773')).to eq(expected_result)
+    end
+    
+    it "should return a count for the collection" do
+      expect(@df.get_count_for_collection('nt028fd5773')).to eq(11)
+    end
+    
+    it "should return a hash of all collections" do
+      expected_result = JSON['{"collection":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":["The Revs Institute for Automotive Research, Inc."]},{"druid":"druid:wy149zp6932","latest_change":"2014-06-06T05:06:06Z","title":["The George Phillips Collection of the Revs Institute"]},{"druid":"druid:yg867hg1375","latest_change":"2013-11-11T23:34:29Z","title":["Francis E. Stafford photographs, 1909-1933"]},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":["TThe Bruce R. Craig Collection of the Revs Institutee"]}],"counts":[{"collection":4},{"total_count":4}]}']
+      expect(@df.list_all_collections).to eq(expected_result)
+    end
+    
+  end
  
 end

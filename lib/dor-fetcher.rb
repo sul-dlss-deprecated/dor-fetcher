@@ -14,15 +14,29 @@ module DorFetcher
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
     end
-    #options :count_only, :first_modified, :last_modified
+    
+    
+    #Get a hash of all members of a collection
+    #
+    #@param collection [String] we expect pid/druid
+    #@param params [Hash] we expect :count_only or any of @@supported_params
+    #@return [Hash] Hash of JSON response from web service
     def get_collection(collection, params = {})
       return query_api('collection', collection, params)
     end
     
+    #Get the count of the number of items in a collection, including the 
+    #collection object itself
+    #@param collection [String] we expect pid/druid
+    #@param params [Hash] we expect :count_only or any of @@supported_params
+    #@return [Integer] Number found
     def get_count_for_collection(collection, params = {})
       return query_api('collection', collection, add_count_only_param(params))
     end
   
+    #Get a Hash of all the collections in the digital repository 
+    #@return [Hash] Hash of all collections including pid/druid, title,  
+    #date last modified, and count
     def list_all_collections
       return query_api('collection', '', {})
     end
