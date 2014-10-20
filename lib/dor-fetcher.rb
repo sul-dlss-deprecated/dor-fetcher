@@ -16,11 +16,12 @@ module DorFetcher
     end
     
     
-    #Get a hash of all members of a collection
+    #Get a hash of all members of a collection and the collection itself
     #
     #@param collection [String] we expect pid/druid
     #@param params [Hash] we expect :count_only or any of @@supported_params
-    #@return [Hash] Hash of JSON response from web service
+    #@return [Hash] Hash of all objects in the collection including 
+    #pid/druid, title, date last modified, and count
     def get_collection(collection, params = {})
       return query_api('collection', collection, params)
     end
@@ -47,19 +48,33 @@ module DorFetcher
       return query_api('collection', '', {:count_only=>true})
     end
   
-    #options :count_only, :first_modified, :last_modified
+    #Get the APO and all objects governed by the APO
+    #@param apo [String] pid/druid of the APO
+    #@param params [Hash] we expect :count_only or any of @@supported_params
+    #@return [Hash] Hash of all objects governed by the APO including    
+    #pid/druid, title, date last modified, and count
     def get_apo(apo, params= {})
       return query_api('apo', apo, params)
     end
     
+    #Get the count of the number of objects in an APO, including the 
+    #APO object itself
+    #@param apo [String] we expect pid/druid
+    #@param params [Hash] we expect :count_only or any of @@supported_params
+    #@return [Integer] Number found
     def get_count_for_apo(apo, params={})
       return query_api('apo', apo, add_count_only_param(params))
     end
   
+    #Get a Hash of all the APOs in the digital repository 
+    #@return [Hash] Hash of all APOs including pid/druid, title,  
+    #date last modified, and count
     def list_all_apos
       return query_api('apo', '', {})
     end
     
+    #Get a Count of all the APOs in the digital repository 
+    #@return [Integer] Number of all APOs
     def total_apo_count
       return query_api('apo', '', {:count_only=>true})
     end

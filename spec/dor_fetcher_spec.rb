@@ -72,6 +72,23 @@ describe DorFetcher::Client do
       expect(@df.total_collection_count).to eq(4)
     end
     
+    it "should return a Hash of all objects governed by an APO and the APO object" do
+      expected_result = JSON['{"collection":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":["The Revs Institute for Automotive Research, Inc."]},{"druid":"druid:wy149zp6932","latest_change":"2014-06-06T05:06:06Z","title":["The George Phillips Collection of the Revs Institute"]},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":["TThe Bruce R. Craig Collection of the Revs Institutee"]}],"adminpolicy":[{"druid":"druid:qv648vd4392","latest_change":"2013-11-11T23:34:29Z","title":["The Revs Institute for Automotive Research"]}],"item":[{"druid":"druid:bb001zc5754","latest_change":"2014-06-06T05:06:06Z","title":["French Grand Prix and 12 Hour Rheims: 1954"]},{"druid":"druid:bb004bn8654","latest_change":"2014-06-06T05:06:06Z","title":[" Bryar 250 Trans-American: 1966"]},{"druid":"druid:bb013sq9803","latest_change":"2014-06-06T05:06:06Z","title":["Swedish Grand Prix: 1976"]},{"druid":"druid:bb014bd3784","latest_change":"2014-06-06T05:06:06Z","title":["Bridgehampton Double 500: 1964"]},{"druid":"druid:bb023nj3137","latest_change":"2014-06-06T05:06:06Z","title":["Snetterton Vanwall Trophy: 1958"]},{"druid":"druid:bb027yn4436","latest_change":"2014-06-06T05:06:06Z","title":["Crystal Palace BARC: 1954"]},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":["Tourist Trophy Goodwood: 1959"]},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":["Permatex 300 NASCAR Race: 1968"]}],"counts":[{"collection":3},{"adminpolicy":1},{"item":8},{"total_count":12}]}']
+      expect(@df.get_apo('druid:qv648vd4392')).to eq(expected_result) 
+    end
+    
+    it "should return a count for the APO" do
+      expect(@df.get_count_for_apo('druid:qv648vd4392')).to eq(12)
+    end
+    
+    it "should return a hash of all APOs" do
+      expected_result = JSON['{"adminpolicy":[{"druid":"druid:qv648vd4392","latest_change":"2013-11-11T23:34:29Z","title":["The Revs Institute for Automotive Research"]},{"druid":"druid:vb546ms7107","latest_change":"2014-09-09T15:40:29Z","title":["Stafford Photos"]}],"counts":[{"adminpolicy":2},{"total_count":2}]}']
+      expect(@df.list_all_apos).to eq(expected_result)
+    end
+    
+    it "should return a count of all APOs in the digital repo" do
+      expect(@df.total_apo_count).to eq(2)
+    end
     
   end
  
