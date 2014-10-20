@@ -50,10 +50,12 @@ module DorFetcher
     
     def druid_array(response)
       return_list = []
-      j = JSON.parse(response)
+      j = response.to_json
+      puts j.keys
       j.keys.each do |key|
         j[key].each do |item|
           return_list << item['druid'] if item['druid'] != nil
+          puts return_list
         end
       end
       return return_list
@@ -61,6 +63,9 @@ module DorFetcher
     
     def query_api(base, druid, params)
       url = "#{@service_url}/#{base}/#{druid}#{add_params(params)}"
+      #url = @service_url + "/" + base + "/" + druid + add_params(params)
+      puts url
+      
       begin
         resp = Net::HTTP.get_response(URI.parse(url))
       rescue
@@ -68,7 +73,7 @@ module DorFetcher
       end
       
       return resp.body.to_i if params[:count_only] == true
-      return resp.body
+      return resp.body.to_json
       
     end
     
@@ -88,6 +93,11 @@ module DorFetcher
       params.store(:count_only, true)
       return params
     end
+    
+    def service_url
+      return @service_url
+    end
+    
   end
     
 end

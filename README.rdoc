@@ -73,7 +73,7 @@ Wrap any of the calls above in df.druid_array to produce just an array of druids
     git checkout -b my-new-feature
 * Write code and tests
 * Ensure all the tests passes via
-    rspec spec
+    bundle exec rspec
 * Merge back into master
 * Bump the version in the gemspec
 * Release via RubyGems
