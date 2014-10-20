@@ -41,6 +41,8 @@ module DorFetcher
       return query_api('collection', '', {})
     end
     
+    #Get a Count of all the collections in the digital repository 
+    #@return [Integer] Number of all collections
     def total_collection_count
       return query_api('collection', '', {:count_only=>true})
     end

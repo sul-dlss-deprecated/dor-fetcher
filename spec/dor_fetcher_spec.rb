@@ -68,6 +68,11 @@ describe DorFetcher::Client do
       expect(@df.list_all_collections).to eq(expected_result)
     end
     
+    it "should return a count of all collections in the digital repo" do
+      expect(@df.total_collection_count).to eq(4)
+    end
+    
+    
   end
  
 end
