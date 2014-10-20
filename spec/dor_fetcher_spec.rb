@@ -26,7 +26,18 @@ describe DorFetcher::Client do
     expect(@df.add_count_only_param(params)).to eq(params.merge!(count_only: true))
   end
 
-  xit "it properly add multiple params" do
+  it "it should only add supported params to a RESTful API Call" do
+    params = {:first_modified => 'foo', :last_modified=> 'bar', :fred => 'carl'}
+    expect(@df.add_params(params)).to eq("?first_modified=foo&last_modified=bar")
+  end
+  
+  it "it should properly add one parameter to a RESTful API Call" do
+    params = {:first_modified => 'foo'}
+    expect(@df.add_params(params)).to eq("?first_modified=foo")
+  end
+  
+  it "it should properly translate :count_only=>true to rows=0" do
+    expect(@df.add_params(@df.add_count_only_param({}))).to eq("?rows=0")
   end
   
   it "druids_array should take in JSON and return a list of just the druids" do

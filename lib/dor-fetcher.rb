@@ -77,17 +77,21 @@ module DorFetcher
       
     end
     
-    def add_params(params)
+    #Transform a parameter hash into a RESTful API parameter format
+    #
+    #@param input_params [Hash] {The existing parameters, eg time and tag}
+    #@return [String] parameters in the Hash now formatted into a RESTful parameter string
+    def add_params(input_params)
       args_string = ""
       
       #Handle Count Only
-      args_string << @@count_only_param if params[:count_only] == true
+      args_string << @@count_only_param if input_params[:count_only] == true
       
       count = 0
       @@supported_params.each do |p|
-        args_string << "?" if count == 0
-        args_string << "&" if count > 0
-        args_string << "#{p.to_s}=#{params[p]}" if params[p] != nil
+        operator = "?"
+        operator = "&" if count > 0
+        args_string << "#{operator}#{p.to_s}=#{input_params[p]}" if input_params[p] != nil
         count += 1
       end
       return args_string
