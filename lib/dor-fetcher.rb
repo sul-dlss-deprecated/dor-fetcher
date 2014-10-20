@@ -48,6 +48,10 @@ module DorFetcher
       return query_api('apo', '', {:count_only=>true})
     end
     
+    #Method to parse full Hash into an array containing only the druids
+    #
+    #@param response [Hash] Hash as returned by query_api
+    #@return [Array] the array listing all druids in the supplied Hash
     def druid_array(response)
       return_list = []
       j = response
@@ -79,12 +83,20 @@ module DorFetcher
       #Handle Count Only
       args_string << @@count_only_param if params[:count_only] == true
       
+      count = 0
       @@supported_params.each do |p|
-        args_string << "#?{p.to_s}=#{params[p]}" if params[p] != nil
+        args_string << "?" if count == 0
+        args_string << "&" if count > 0
+        args_string << "#{p.to_s}=#{params[p]}" if params[p] != nil
+        count += 1
       end
       return args_string
     end
     
+    #Add the parameter so query_api knows only to get a count of the documents in solr
+    #
+    #@param params [Hash] {The existing parameters, eg time and tag}
+    #@return [Hash] the params Hash plus the key/value set :count_only=>true
     def add_count_only_param(params)
       params.store(:count_only, true)
       return params

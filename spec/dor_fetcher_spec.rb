@@ -1,9 +1,12 @@
 require "spec_helper"
 
 describe DorFetcher::Client do
+  before(:each) do
+    @df = DorFetcher::Client.new
+  end
+  
   it "should initialize by default with a URL point to http://127.0.0.1:3000" do
-    df = DorFetcher::Client.new
-    expect(df.service_url).to eq("http://127.0.0.1:3000")
+    expect(@df.service_url).to eq("http://127.0.0.1:3000")
   end
   
   it "should initialize to any URL you provide it" do
@@ -11,6 +14,19 @@ describe DorFetcher::Client do
    df = DorFetcher::Client.new(:service_url => url)
    expect(df.service_url).to eq(url)
    
+  end
+  
+  it "should add only the count only parameter to an empty hash" do
+    params = {} 
+    expect(@df.add_count_only_param(params)).to eq({:count_only => true})
+  end
+  
+  it "should add only the count only parameter to a hash with keys" do
+    params = {:first_modified => 'foo', :last_modified => 'bar'} 
+    expect(@df.add_count_only_param(params)).to eq(params.merge!(count_only: true))
+  end
+
+  xit "it properly add multiple params" do
   end
   
   it "druids_array should take in JSON and return a list of just the druids" do
