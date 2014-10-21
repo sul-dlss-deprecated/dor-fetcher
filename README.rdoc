@@ -1,4 +1,7 @@
 = dor-fetcher
+{<img src="https://travis-ci.org/sul-dlss/dor-fetcher.svg" alt="Build Status" />}[https://travis-ci.org/sul-dlss/dor-fetcher]
+{<img src="https://coveralls.io/repos/sul-dlss/dor-fetcher/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/sul-dlss/dor-fetcher]
+{<img src="https://badge.fury.io/rb/dor-fetcher.svg" alt="Gem Version" />}[http://badge.fury.io/rb/dor-fetcher]
 
 This gem provides a basic wrapper for reaching the API of an instance of dor-fetcher-service: https://github.com/sul-dlss/dor-fetcher-service.  This ReadMe assumes your familiar with the API of dor-fetcher-service, its JSON return and are just looking to leverage that with this gem.  
 
@@ -73,7 +76,7 @@ Wrap any of the calls above in df.druid_array to produce just an array of druids
 * If writing tests that rely on network calls you need to make a VCR cassette for them or it will fail.
 * If old cassettes are broken, remove them from spec/fixtures/vcr_casettes, bring up a local instance of dor-fetcher-service and new ones will automatically record
 * Ensure all the tests passes via
-    bundle exec rspec
+    rake rspec
 * Merge back into master
 * Bump the version in the gemspec
 * Release via RubyGems
