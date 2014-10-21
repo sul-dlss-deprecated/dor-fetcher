@@ -80,7 +80,7 @@ Wrap any of the calls above in df.druid_array to produce just an array of druids
     rake rspec
 * Merge back into master
 * Bump the version in the gemspec
-* Release via RubyGems
+* Release to RubyGems via the command rake release
 
 == Building and Installing Locally
 
