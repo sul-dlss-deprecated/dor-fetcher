@@ -4,9 +4,7 @@ This gem provides a basic wrapper for reaching the API of an instance of dor-fet
 
 == Using This Gem
 
-Note: If you're in IRB or such the JSON will appear in its escaped form.
-
-* Add dor-fetcher to your Gemlist and require it where appriorate.
+* Add dor-fetcher to your Gemlist and require it where appropriate.
     gem 'dor-fetcher'
 * Initialize via 
     df = DorFetcher::Client.new({:service_url => 'http://YOUR_URL_HERE'})
@@ -51,13 +49,13 @@ You can pass your druid in as druid:PID or just PID.  dor-fetcher-service can ha
 * Admin Policy Objects: df.get_apo(apo_druid, params)
 * Collections: df.get_collection(collect_druid, params)
 
-The above returns a JSON string of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_OBJECT methods?
+The above returns a hash of all members of the collection, unless you pass in :count_only => true as a param.  If you're doing that though, why not use the df.get_count_for_OBJECT methods?
 
 === Advanced Querying
 
 Use: df.query_api(base, druid, params)
 To produce the call: 
-    http://SERVICE-URL/BASE/DRUID?PARAM1=FOO?PARAM2=bar?etc
+    http://SERVICE-URL/BASE/DRUID?PARAM1=foo?PARAM2=bar?etc
     
 === I Just Want An Array Of Druids
 
@@ -72,8 +70,10 @@ Wrap any of the calls above in df.druid_array to produce just an array of druids
 * Create your feature branch
     git checkout -b my-new-feature
 * Write code and tests
+* If writing tests that rely on network calls you need to make a VCR cassette for them or it will fail.
+* If old cassettes are broken, remove them from spec/fixtures/vcr_casettes, bring up a local instance of dor-fetcher-service and new ones will automatically record
 * Ensure all the tests passes via
-    rspec spec
+    bundle exec rspec
 * Merge back into master
 * Bump the version in the gemspec
 * Release via RubyGems
