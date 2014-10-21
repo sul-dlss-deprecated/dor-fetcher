@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'dor-fetcher'
-  s.version     = '0.0.3'
-  s.date        = '2014-10-20'
+  s.version     = '1.0.0'
+  s.date        = '2014-10-21'
   s.summary     = "DorFetcher Gem"
-  s.description = "Wrapped for the Dor Fetcher Services restful api."
-  s.authors     = ["Carrick Rogers", "Laney McGlohon"]
-  s.email       = ['carrickr@stanford.edu', 'laneymcg@stanford.edu']
-  s.files       = Dir.glob("lib/**/*") + Dir.glob("config/**/*") + Dir.glob('bin/*')
+  s.description = "Wrapper for the Dor Fetcher Services RESTful API."
+  s.authors     = ["Carrick Rogers", "Laney McGlohon", "Bess Sadler"]
+  s.email       = ['carrickr@stanford.edu', 'laneymcg@stanford.edu', 'bess@stanford.edu']
+  s.files       = Dir.glob("lib/**/*")
   s.homepage    = "http://www.stanford.edu"
   s.license     = "Apache-2.0"
   s.add_development_dependency "rspec"
