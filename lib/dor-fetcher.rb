@@ -27,7 +27,7 @@ module DorFetcher
     #@return [Hash] Hash of all objects in the collection including 
     #pid/druid, title, date last modified, and count
     def get_collection(collection, params = {})
-      return query_api('collection', collection, params)
+      return query_api('collections', collection, params)
     end
     
     #Get the count of the number of items in a collection, including the 
@@ -36,20 +36,20 @@ module DorFetcher
     #@param params [Hash] we expect :count_only or any of @@supported_params
     #@return [Integer] Number found
     def get_count_for_collection(collection, params = {})
-      return query_api('collection', collection, add_count_only_param(params))
+      return query_api('collections', collection, add_count_only_param(params))
     end
   
     #Get a Hash of all the collections in the digital repository 
     #@return [Hash] Hash of all collections including pid/druid, title,  
     #date last modified, and count
     def list_all_collections
-      return query_api('collection', '', {})
+      return query_api('collections', '', {})
     end
     
     #Get a Count of all the collections in the digital repository 
     #@return [Integer] Number of all collections
     def total_collection_count
-      return query_api('collection', '', {:count_only=>true})
+      return query_api('collections', '', {:count_only=>true})
     end
   
     #Get the APO and all objects governed by the APO
@@ -58,7 +58,7 @@ module DorFetcher
     #@return [Hash] Hash of all objects governed by the APO including    
     #pid/druid, title, date last modified, and count
     def get_apo(apo, params= {})
-      return query_api('apo', apo, params)
+      return query_api('apos', apo, params)
     end
     
     #Get the count of the number of objects in an APO, including the 
@@ -67,20 +67,20 @@ module DorFetcher
     #@param params [Hash] we expect :count_only or any of @@supported_params
     #@return [Integer] Number found
     def get_count_for_apo(apo, params={})
-      return query_api('apo', apo, add_count_only_param(params))
+      return query_api('apos', apo, add_count_only_param(params))
     end
   
     #Get a Hash of all the APOs in the digital repository 
     #@return [Hash] Hash of all APOs including pid/druid, title,  
     #date last modified, and count
     def list_all_apos
-      return query_api('apo', '', {})
+      return query_api('apos', '', {})
     end
     
     #Get a Count of all the APOs in the digital repository 
     #@return [Integer] Number of all APOs
     def total_apo_count
-      return query_api('apo', '', {:count_only=>true})
+      return query_api('apos', '', {:count_only=>true})
     end
     
     #Method to parse full Hash into an array containing only the druids

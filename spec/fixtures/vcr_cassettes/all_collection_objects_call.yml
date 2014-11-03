@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/collection/
+    uri: http://127.0.0.1:3000/collections/
     body:
       encoding: US-ASCII
       string: ''
@@ -29,13 +29,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 838a395a-4929-478b-9554-f7a724286d3b
+      - 69917f23-3a8c-4277-a2a3-6cd83d3b3dcd
       X-Runtime:
-      - '0.007048'
+      - '0.005641'
       Server:
       - WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
       Date:
-      - Mon, 20 Oct 2014 23:51:46 GMT
+      - Mon, 03 Nov 2014 22:48:06 GMT
       Content-Length:
       - '585'
       Connection:
@@ -48,5 +48,5 @@ http_interactions:
         E. Stafford photographs, 1909-1933"]},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":["TThe
         Bruce R. Craig Collection of the Revs Institutee"]}],"counts":[{"collection":4},{"total_count":4}]}'
     http_version: 
-  recorded_at: Mon, 20 Oct 2014 23:51:46 GMT
+  recorded_at: Mon, 03 Nov 2014 22:48:06 GMT
 recorded_with: VCR 2.9.3

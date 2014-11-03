@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/apo/druid:qv648vd4392
+    uri: http://127.0.0.1:3000/apos/druid:qv648vd4392
     body:
       encoding: US-ASCII
       string: ''
@@ -29,13 +29,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 99dccb7d-3055-483f-8804-4d9090ec14cc
+      - c003938f-3e0a-453b-8181-17735738f2f9
       X-Runtime:
-      - '0.007993'
+      - '0.006806'
       Server:
       - WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
       Date:
-      - Mon, 20 Oct 2014 23:54:02 GMT
+      - Mon, 03 Nov 2014 22:48:06 GMT
       Content-Length:
       - '1538'
       Connection:
@@ -56,5 +56,5 @@ http_interactions:
         Trophy Goodwood: 1959"]},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":["Permatex
         300 NASCAR Race: 1968"]}],"counts":[{"collection":3},{"adminpolicy":1},{"item":8},{"total_count":12}]}'
     http_version: 
-  recorded_at: Mon, 20 Oct 2014 23:54:02 GMT
+  recorded_at: Mon, 03 Nov 2014 22:48:06 GMT
 recorded_with: VCR 2.9.3
