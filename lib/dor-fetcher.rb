@@ -11,8 +11,8 @@ module DorFetcher
     
     #Create a new instance of DorFetcher::Client
     #@param options [Hash] Currently supports :service_url and :skip_heartbeat.
-    #:service_url is the base url for API queries.  Defaults to http://127.0.0.1:3000
-    #:skip_heartbeat will tell the init to skip querying the :service_url and seeing if the API is responsive
+    #@param :service_url is the base url for API queries.  Defaults to http://127.0.0.1:3000
+    #@param :skip_heartbeat will tell the init to skip querying the :service_url and seeing if the API is responsive
     #@example
     #    df = DorFetcher::Client.new({:service_url='http://SERVICEURL'})
     def initialize options = {}
