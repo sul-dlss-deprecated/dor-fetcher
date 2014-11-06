@@ -10,13 +10,26 @@ module DorFetcher
     @@default_service_url = 'http://127.0.0.1:3000'
     
     #Create a new instance of DorFetcher::Client
-    #@param options [Hash] Currently supports only :service_url, the base 
-    #url for API queries.  Defaults to http://127.0.0.1:3000
+    #@param options [Hash] Currently supports :service_url and :skip_heartbeat.
+    #:service_url is the base url for API queries.  Defaults to http://127.0.0.1:3000
+    #:skip_heartbeat will tell the init to skip querying the :service_url and seeing if the API is responsive
     #@example
     #    df = DorFetcher::Client.new({:service_url='http://SERVICEURL'})
     def initialize options = {}
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
+
+      if not options[:skip_heartbeat]
+        raise "DorFetcher::Client Error! No response from #{@service_url}" if not self.is_alive
+      end
+    end
+    
+    #Check to see if the dor-fetcher-service is responding to requests, this is a basic heart beat checker
+    #@return [Boolean] True for a service that responds, False for a service that does not.
+    def is_alive
+      resp = Net::HTTP.get_response(URI.parse(@service_url))
+      #Since dor-fetcher-service uses the is_alive gem, the main page should simply have okay on it
+      return "ok".eql?(resp.body) 
     end
     
     

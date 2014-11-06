@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://umich.edu/~carrickr
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Thu, 06 Nov 2014 19:28:08 GMT
+      Server:
+      - Apache
+      Location:
+      - http://www-personal.umich.edu/~carrickr
+      Content-Length:
+      - '247'
+      Content-Type:
+      - text/html; charset=iso-8859-1
+    body:
+      encoding: US-ASCII
+      string: ! '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+        <html><head>
+
+        <title>301 Moved Permanently</title>
+
+        </head><body>
+
+        <h1>Moved Permanently</h1>
+
+        <p>The document has moved <a href="http://www-personal.umich.edu/~carrickr">here</a>.</p>
+
+        </body></html>
+
+'
+    http_version: 
+  recorded_at: Thu, 06 Nov 2014 19:28:08 GMT
+recorded_with: VCR 2.9.3

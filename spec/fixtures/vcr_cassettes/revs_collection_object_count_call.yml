@@ -29,13 +29,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - dbc42b74-c29c-4cde-9443-6458b21ae814
+      - a2e6652f-26f2-4258-be6f-b34a1116da89
       X-Runtime:
-      - '0.009278'
+      - '0.007347'
       Server:
       - WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
       Date:
-      - Wed, 05 Nov 2014 19:07:47 GMT
+      - Thu, 06 Nov 2014 19:23:38 GMT
       Content-Length:
       - '2'
       Connection:
@@ -44,5 +44,5 @@ http_interactions:
       encoding: US-ASCII
       string: '11'
     http_version: 
-  recorded_at: Wed, 05 Nov 2014 19:07:47 GMT
+  recorded_at: Thu, 06 Nov 2014 19:23:38 GMT
 recorded_with: VCR 2.9.3
