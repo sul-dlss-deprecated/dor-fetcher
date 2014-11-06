@@ -3,18 +3,38 @@ require "spec_helper"
 describe DorFetcher::Client do
   describe "Preparing input for RESTful API calls" do
     before(:each) do
-      @df = DorFetcher::Client.new
+      @df = DorFetcher::Client.new(:skip_heartbeat=> true)
+      @bad_init_url = "http://umich.edu/~carrickr"
     end
 
     it "should initialize by default with a URL point to http://127.0.0.1:3000" do
-      expect(@df.service_url).to eq("http://127.0.0.1:3000")
+        expect(@df.service_url).to eq("http://127.0.0.1:3000")
     end
   
-    it "should initialize to any URL you provide it" do
+    it "should initialize to any URL you provide it with heartbeat skipped" do
      url = 'http://wwww.test-url.com'
-     df = DorFetcher::Client.new(:service_url => url)
+     df = DorFetcher::Client.new(:service_url => url, :skip_heartbeat=> true)
      expect(df.service_url).to eq(url)
-   
+    end
+    
+    it "should be able to query the provided fetcher url service that is alive" do
+      VCR.use_cassette('good_heartbeat_check') do
+        df = DorFetcher::Client.new
+        expect(df.is_alive).to eq(true)
+      end
+    end
+    
+    it "should fail to initialize when a bad url is provided" do
+      VCR.use_cassette('bad_heartbeat_check') do
+        expect {DorFetcher::Client.new(:service_url => @bad_init_url)}.to raise_error
+      end
+    end
+    
+    it "should detect when a fetcher url has stopped responding" do
+      VCR.use_cassette('bad_heartbeat_check') do
+        df = DorFetcher::Client.new(:service_url => @bad_init_url, :skip_heartbeat => true)
+        expect(df.is_alive).to eq(false)
+      end
     end
   
     it "should add only the count only parameter to an empty hash" do
@@ -44,14 +64,13 @@ describe DorFetcher::Client do
     it "druids_array should take in JSON and return a list of just the druids" do
       input = JSON['{"collections":[{"druid":"druid:yg867hg1375","latest_change":"2013-11-11T23:34:29Z","title":"Francis E. Stafford photographs, 1909-1933"}],"items":[{"druid":"druid:jf275fd6276","latest_change":"2013-11-11T23:34:29Z","title":"Album A: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."},{"druid":"druid:nz353cp1092","latest_change":"2013-11-11T23:34:29Z","title":"Album E: Photographs of the Seventh Day Adventist Church missionaries in China"},{"druid":"druid:tc552kq0798","latest_change":"2013-11-11T23:34:29Z","title":"Album D: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."},{"druid":"druid:th998nk0722","latest_change":"2013-11-11T23:34:29Z","title":"Album C: Photographs of the Chinese Revolution of 1911 and the Shanghai Commercial Press"},{"druid":"druid:ww689vs6534","latest_change":"2013-11-11T23:34:29Z","title":"Album B: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."}],"counts":[{"collections":1},{"items":5},{"total_count":6}]}']
       expected_output = ["druid:yg867hg1375", "druid:jf275fd6276", "druid:nz353cp1092", "druid:tc552kq0798", "druid:th998nk0722", "druid:ww689vs6534"]
-      df = DorFetcher::Client.new
-      expect(df.druid_array(input)).to eq(expected_output)
+      expect(@df.druid_array(input)).to eq(expected_output)
     end
   end
   
   describe "Calling RESTful API and processing output" do
     before(:each) do
-      @df = DorFetcher::Client.new
+      @df = DorFetcher::Client.new(:skip_heartbeat=> true)
     end
     
     it "should return a Hash of all items in a collection and the collection object" do
@@ -110,7 +129,7 @@ describe DorFetcher::Client do
   
   describe "Query API" do
     before(:each) do
-      @df = DorFetcher::Client.new
+      @df = DorFetcher::Client.new(:skip_heartbeat=> true)
     end
     
     it "should be able to return a count of objects governed by an APO bounded by datetime parameters" do
