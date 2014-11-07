@@ -8,6 +8,7 @@ module DorFetcher
     @@supported_params = [:first_modified, :last_modified]
     @@count_only_param = "?rows=0"
     @@default_service_url = 'http://127.0.0.1:3000'
+    @@counts_key = 'counts'
     
     #Create a new instance of DorFetcher::Client
     #@param options [Hash] Currently supports :service_url and :skip_heartbeat.
@@ -104,8 +105,10 @@ module DorFetcher
       return_list = []
       j = response
       j.keys.each do |key|
-        j[key].each do |item|
-          return_list << item['druid'] if item['druid'] != nil
+        if key != @@counts_key
+          j[key].each do |item|
+            return_list << item['druid'] if item['druid'] != nil
+          end
         end
       end
       return return_list
