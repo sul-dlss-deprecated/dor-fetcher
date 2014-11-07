@@ -25,19 +25,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - ! '"6fb60a98695a4d9a454055e030f586f3"'
+      - ! '"ba84e9ebfb05f15d5f3b8f628ae03b00"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 69aa4ddf-081c-483f-bef8-829ed9ecb70c
+      - 4fe3959a-3022-4857-aeb3-8e26df510752
       X-Runtime:
-      - '0.011247'
+      - '0.009761'
       Server:
       - WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
       Date:
-      - Thu, 06 Nov 2014 19:23:38 GMT
+      - Fri, 07 Nov 2014 23:16:57 GMT
       Content-Length:
-      - '1522'
+      - '1514'
       Connection:
       - Keep-Alive
     body:
@@ -54,7 +54,7 @@ http_interactions:
         Vanwall Trophy: 1958"},{"druid":"druid:bb027yn4436","latest_change":"2014-06-06T05:06:06Z","title":"Crystal
         Palace BARC: 1954"},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":"Tourist
         Trophy Goodwood: 1959"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex
-        300 NASCAR Race: 1968"}],"counts":[{"collections":3},{"adminpolicies":1},{"items":8},{"total_count":12}]}'
+        300 NASCAR Race: 1968"}],"counts":{"collections":3,"adminpolicies":1,"items":8,"total_count":12}}'
     http_version: 
-  recorded_at: Thu, 06 Nov 2014 19:23:38 GMT
+  recorded_at: Fri, 07 Nov 2014 23:16:57 GMT
 recorded_with: VCR 2.9.3
