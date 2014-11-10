@@ -2,19 +2,21 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/collections/nt028fd5773
+    uri: http://127.0.0.1:3000/collections/nt028fd5773/
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - ! '*/*'
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
       User-Agent:
       - Ruby
   response:
     status:
       code: 200
-      message: ! 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -28,18 +30,16 @@ http_interactions:
       - ! '"859ea45e19d647778430659e42d0d2ce"'
       Cache-Control:
       - max-age=0, private, must-revalidate
+      X-Meta-Request-Version:
+      - 0.3.4
       X-Request-Id:
-      - bd7d547c-78a0-4f87-b35c-af7c13f5195c
+      - 75862986-cccc-450c-85f2-b53ad7965760
       X-Runtime:
-      - '0.009385'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
-      Date:
-      - Fri, 07 Nov 2014 23:19:37 GMT
-      Content-Length:
-      - '1356'
+      - '0.016851'
       Connection:
-      - Keep-Alive
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
       string: ! '{"collections":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":"The
@@ -55,5 +55,5 @@ http_interactions:
         Trophy Goodwood: 1959"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex
         300 NASCAR Race: 1968"}],"counts":{"collections":3,"items":8,"total_count":11}}'
     http_version: 
-  recorded_at: Fri, 07 Nov 2014 23:19:37 GMT
+  recorded_at: Mon, 10 Nov 2014 20:05:53 GMT
 recorded_with: VCR 2.9.3
