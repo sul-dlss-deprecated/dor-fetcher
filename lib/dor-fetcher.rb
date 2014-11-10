@@ -1,4 +1,4 @@
-require 'net/http'
+require 'rest_client'
 require 'json'
 
 module DorFetcher
@@ -19,18 +19,22 @@ module DorFetcher
     def initialize options = {}
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
+      @site = RestClient::Resource.new(@service_url) 
 
       if not options[:skip_heartbeat]
         raise "DorFetcher::Client Error! No response from #{@service_url}" if not self.is_alive
       end
+      
+      
+      
     end
     
     #Check to see if the dor-fetcher-service is responding to requests, this is a basic heart beat checker
     #@return [Boolean] True for a service that responds, False for a service that does not.
     def is_alive
-      resp = Net::HTTP.get_response(URI.parse(@service_url))
+      resp = @site.get
       #Since dor-fetcher-service uses the is_alive gem, the main page should simply have okay on it
-      return "ok".eql?(resp.body) 
+      return 200.eql?(resp.code) && "ok".eql?(resp) 
     end
     
     
@@ -122,41 +126,43 @@ module DorFetcher
     #@return [Hash] Hash of all objects governed by the APO including    
     #pid/druid, title, date last modified, and count
     def query_api(base, druid, params)
-      url = "#{@service_url}/#{base}/#{druid}#{add_params(params)}"
-      
+      url = "#{base}/#{druid}/#{add_params(params)}"
       begin
-        resp = Net::HTTP.get_response(URI.parse(url))
+        resp = @site[url].get
       rescue
         raise "Connection Error with url #{url}"
       end
       
-      return resp.body.to_i if params[:count_only] == true
-      return JSON[resp.body] #Convert the response JSON to a Ruby Hash
+      #RestClient monkey patches its response so it looks like a string, but really isn't.
+      #If you just dd resp.to_i, you'll get the HTML Code, normally 200, not the actually body text you want
+      return resp[0..resp.size].to_i if params[:count_only] == true 
+      
+      return JSON[resp] #Convert the response JSON to a Ruby Hash
     end
     
-    #Transform a parameter hash into a RESTful API parameter format
-    #
-    #@param input_params [Hash] {The existing parameters, eg time and tag}
-    #@return [String] parameters in the Hash now formatted into a RESTful parameter string
-    def add_params(input_params)
-      args_string = ""
-      
-      #Handle Count Only
-      args_string << @@count_only_param if input_params[:count_only] == true
-      
-      #If we did not add in a rows=0 param, args_string will have a size of 
-      #zero
-      #If we did add in a rows=0 param, this will set count to greater than 
-      #zero
-      count = args_string.size
-      @@supported_params.each do |p|
-        operator = "?"
-        operator = "&" if count > 0
-        args_string << "#{operator}#{p.to_s}=#{input_params[p]}" if input_params[p] != nil
-        count += 1
-      end
-      return args_string
-    end
+  #Transform a parameter hash into a RESTful API parameter format
+   #
+   #@param input_params [Hash] {The existing parameters, eg time and tag}
+   #@return [String] parameters in the Hash now formatted into a RESTful parameter string
+   def add_params(input_params)
+     args_string = ""
+  
+     #Handle Count Only
+     args_string << @@count_only_param if input_params[:count_only] == true
+  
+     #If we did not add in a rows=0 param, args_string will have a size of 
+     #zero
+     #If we did add in a rows=0 param, this will set count to greater than 
+     #zero
+     count = args_string.size
+     @@supported_params.each do |p|
+       operator = "?"
+       operator = "&" if count > 0
+       args_string << "#{operator}#{p.to_s}=#{input_params[p]}" if input_params[p] != nil
+       count += 1
+     end
+     return args_string
+   end
     
     #Add the parameter so query_api knows only to get a count of the documents in solr
     #
