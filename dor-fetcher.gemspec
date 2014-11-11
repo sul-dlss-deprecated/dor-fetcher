@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'dor-fetcher'
   s.version     = '1.1.0'
-  s.date        = '2014-11-10'
+  s.date        = '2014-11-11'
   s.summary     = "DorFetcher Gem"
   s.description = "Wrapper for the Dor Fetcher Services RESTful API."
   s.authors     = ["Carrick Rogers", "Laney McGlohon", "Bess Sadler"]
@@ -14,4 +14,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "webmock"
   s.add_development_dependency "yard"
   s.add_development_dependency "coveralls"
+  s.add_dependency 'rest-client'
 end
