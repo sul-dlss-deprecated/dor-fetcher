@@ -100,14 +100,19 @@ module DorFetcher
     #Method to parse full Hash into an array containing only the druids
     #
     #@param response [Hash] Hash as returned by query_api
+    #@param no_prefix [boolean] if true (default), remove the druid: prefix on all druids, if false, leave alone
     #@return [Array] the array listing all druids in the supplied Hash
-    def druid_array(response)
+    def druid_array(response,params={})
       return_list = []
       j = response
       j.keys.each do |key|
         if key != @@counts_key
           j[key].each do |item|
-            return_list << item['druid'] if item['druid'] != nil
+            if item['druid'] != nil
+              druid=item['druid'].downcase
+              druid.gsub!('druid:','') if params[:no_prefix]
+              return_list << druid
+            end
           end
         end
       end

@@ -66,6 +66,12 @@ describe DorFetcher::Client do
       expected_output = ["druid:yg867hg1375", "druid:jf275fd6276", "druid:nz353cp1092", "druid:tc552kq0798", "druid:th998nk0722", "druid:ww689vs6534"]
       expect(@df.druid_array(input)).to eq(expected_output)
     end
+    
+    it "druid_array should take in JSON and return a list of just the druids, stripping off druid prefix if requested" do
+      input = JSON['{"collections":[{"druid":"DRUID:yg867hg1375","latest_change":"2013-11-11T23:34:29Z","title":"Francis E. Stafford photographs, 1909-1933"}],"items":[{"druid":"druid:jf275fd6276","latest_change":"2013-11-11T23:34:29Z","title":"Album A: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."},{"druid":"druid:nz353cp1092","latest_change":"2013-11-11T23:34:29Z","title":"Album E: Photographs of the Seventh Day Adventist Church missionaries in China"},{"druid":"druid:tc552kq0798","latest_change":"2013-11-11T23:34:29Z","title":"Album D: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."},{"druid":"druid:th998nk0722","latest_change":"2013-11-11T23:34:29Z","title":"Album C: Photographs of the Chinese Revolution of 1911 and the Shanghai Commercial Press"},{"druid":"druid:ww689vs6534","latest_change":"2013-11-11T23:34:29Z","title":"Album B: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."}],"counts":{"collections":1,"items":5,"total_count":6}}']
+      expected_output = ["yg867hg1375", "jf275fd6276", "nz353cp1092", "tc552kq0798", "th998nk0722", "ww689vs6534"]
+      expect(@df.druid_array(input,{:no_prefix=>true})).to eq(expected_output)
+    end
   end
   
   describe "Calling RESTful API and processing output" do
