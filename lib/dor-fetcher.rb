@@ -22,18 +22,21 @@ module DorFetcher
       @site = RestClient::Resource.new(@service_url) 
 
       if not options[:skip_heartbeat]
-        raise "DorFetcher::Client Error! No response from #{@service_url}" if not self.is_alive
+        raise "DorFetcher::Client Error! No response from #{@service_url}" if not self.is_alive?
       end
-      
-      
-      
+    end
+    
+    # Return service info (rails env, version deployed, last restart and last deploy)
+    #@return [hash] Hash containing service info
+    def service_info
+      resp = @site['about/version.json'].get
+      return JSON[resp]
     end
     
     #Check to see if the dor-fetcher-service is responding to requests, this is a basic heart beat checker
     #@return [Boolean] True for a service that responds, False for a service that does not.
-    def is_alive
+    def is_alive?
       resp = @site.get
-      #Since dor-fetcher-service uses the is_alive gem, the main page should simply have okay on it
       return 200.eql?(resp.code) && "ok".eql?(resp) 
     end
     

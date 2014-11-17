@@ -20,7 +20,15 @@ describe DorFetcher::Client do
     it "should be able to query the provided fetcher url service that is alive" do
       VCR.use_cassette('good_heartbeat_check') do
         df = DorFetcher::Client.new
-        expect(df.is_alive).to eq(true)
+        expect(df.is_alive?).to eq(true)
+      end
+    end
+    
+    it "should check to the service version info" do
+      VCR.use_cassette('version_info') do
+        df = DorFetcher::Client.new
+        version_info = df.service_info
+        expect(version_info['app_name']).to eq('DORFetcherService')
       end
     end
     
@@ -33,7 +41,7 @@ describe DorFetcher::Client do
     it "should detect when a fetcher url has stopped responding" do
       VCR.use_cassette('bad_heartbeat_check') do
         df = DorFetcher::Client.new(:service_url => @bad_init_url, :skip_heartbeat => true)
-        expect(df.is_alive).to eq(false)
+        expect(df.is_alive?).to eq(false)
       end
     end
   
