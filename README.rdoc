@@ -83,6 +83,15 @@ Wrap any of the calls above in df.druid_array to produce just an array of druids
 * Update the date in the gemspec
 * Release to RubyGems via the command rake release
 
+== Command Line Usage
+
+If you have the gem code checked out, you can execute gem commands on the command line by running "bin/console".  This gives you a Ruby console with the gem loaded:
+
+$ bin/console
+
+> fetch=DorFetcher::Client.new({:service_url=>'http://dorfetcher-prod.stanford.edu'})
+> fetch.list_all_apos
+
 == Building and Installing Locally
 
 In the gem directory:
@@ -92,3 +101,5 @@ In the gem directory:
     irb
     require 'dor-fetcher'
     Do Stuff in IRB
+    
+If all you need to do is test the gem in IRB, you can also use bin/console
