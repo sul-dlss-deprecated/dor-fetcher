@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 51b9011a-d748-4359-88a9-18368907e7d7
+      - ac923ac0-4740-460a-a4ac-a1870e392409
       X-Runtime:
-      - '0.010012'
+      - '0.012077'
       Connection:
       - close
       Server:
@@ -46,5 +46,5 @@ http_interactions:
         Revs Institute for Automotive Research"},{"druid":"druid:vb546ms7107","latest_change":"2014-09-09T15:40:29Z","title":"Stafford
         Photos"}],"counts":{"adminpolicies":2,"total_count":2}}'
     http_version: 
-  recorded_at: Mon, 10 Nov 2014 20:05:53 GMT
+  recorded_at: Thu, 20 Nov 2014 23:47:11 GMT
 recorded_with: VCR 2.9.3
