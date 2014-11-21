@@ -27,15 +27,15 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - ! '"859ea45e19d647778430659e42d0d2ce"'
+      - ! '"325532d43d8fa383ede2e843cd2e61fb"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 75862986-cccc-450c-85f2-b53ad7965760
+      - c4e4a270-cc7c-46c0-80d7-3c185db212d5
       X-Runtime:
-      - '0.016851'
+      - '0.016264'
       Connection:
       - close
       Server:
@@ -44,16 +44,15 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"collections":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":"The
         Revs Institute for Automotive Research, Inc."},{"druid":"druid:wy149zp6932","latest_change":"2014-06-06T05:06:06Z","title":"The
-        George Phillips Collection of the Revs Institute"},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":"TThe
+        George Phillips Collection of the Revs Institute","catkey":"3051740"},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":"TThe
         Bruce R. Craig Collection of the Revs Institutee"}],"items":[{"druid":"druid:bb001zc5754","latest_change":"2014-06-06T05:06:06Z","title":"French
-        Grand Prix and 12 Hour Rheims: 1954"},{"druid":"druid:bb004bn8654","latest_change":"2014-06-06T05:06:06Z","title":"
-        Bryar 250 Trans-American: 1966"},{"druid":"druid:bb013sq9803","latest_change":"2014-06-06T05:06:06Z","title":"Swedish
-        Grand Prix: 1976"},{"druid":"druid:bb014bd3784","latest_change":"2014-06-06T05:06:06Z","title":"Bridgehampton
-        Double 500: 1964"},{"druid":"druid:bb023nj3137","latest_change":"2014-06-06T05:06:06Z","title":"Snetterton
-        Vanwall Trophy: 1958"},{"druid":"druid:bb027yn4436","latest_change":"2014-06-06T05:06:06Z","title":"Crystal
-        Palace BARC: 1954"},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":"Tourist
-        Trophy Goodwood: 1959"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex
-        300 NASCAR Race: 1968"}],"counts":{"collections":3,"items":8,"total_count":11}}'
+        Grand Prix and 12 Hour Rheims: 1954","catkey":"3051728"},{"druid":"druid:bb004bn8654","latest_change":"2014-06-06T05:06:06Z","title":"
+        Bryar 250 Trans-American: 1966","catkey":"3051729"},{"druid":"druid:bb013sq9803","latest_change":"2014-06-06T05:06:06Z","title":"Swedish
+        Grand Prix: 1976","catkey":"3051730"},{"druid":"druid:bb014bd3784","latest_change":"2014-06-06T05:06:06Z","title":"Bridgehampton
+        Double 500: 1964","catkey":"3051731"},{"druid":"druid:bb023nj3137","latest_change":"2014-06-06T05:06:06Z","title":"Snetterton
+        Vanwall Trophy: 1958","catkey":"3051732"},{"druid":"druid:bb027yn4436","latest_change":"2014-06-06T05:06:06Z","title":"Crystal
+        Palace BARC: 1954","catkey":"3051733"},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":"","catkey":"3051734"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex
+        300 NASCAR Race: 1968","catkey":"3051735"}],"counts":{"collections":3,"items":8,"total_count":11}}'
     http_version: 
-  recorded_at: Mon, 10 Nov 2014 20:05:53 GMT
+  recorded_at: Thu, 20 Nov 2014 23:47:11 GMT
 recorded_with: VCR 2.9.3

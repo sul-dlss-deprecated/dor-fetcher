@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 00a8a4af-1f7c-49f2-a1bd-3416df552bef
+      - a015e5ec-3b1c-4e80-bd95-b76da0023ee9
       X-Runtime:
-      - '0.005074'
+      - '0.005160'
       Connection:
       - close
       Server:
@@ -44,7 +44,7 @@ http_interactions:
       encoding: US-ASCII
       string: ok
     http_version: 
-  recorded_at: Mon, 17 Nov 2014 23:50:21 GMT
+  recorded_at: Thu, 20 Nov 2014 23:47:09 GMT
 - request:
     method: get
     uri: http://127.0.0.1:3000/about/version.json
@@ -78,9 +78,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - a51fb171-33cc-4311-8181-1c809be6dfa5
+      - 1d97e3ee-16f4-4a48-b5d1-c4c21a9b44c9
       X-Runtime:
-      - '0.004240'
+      - '0.005070'
       Connection:
       - close
       Server:
@@ -89,5 +89,5 @@ http_interactions:
       encoding: US-ASCII
       string: ! '{"app_name":"DORFetcherService","rails_env":"development","version":"November-2014","last_restart":"n/a","last_deploy":"n/a"}'
     http_version: 
-  recorded_at: Mon, 17 Nov 2014 23:50:21 GMT
+  recorded_at: Thu, 20 Nov 2014 23:47:09 GMT
 recorded_with: VCR 2.9.3
