@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 63114c34-4865-43e8-90e6-9e5392f741ca
+      - 34319065-7493-497b-be87-174334237900
       X-Runtime:
-      - '0.008540'
+      - '0.026529'
       Connection:
       - close
       Server:
@@ -44,7 +44,7 @@ http_interactions:
       encoding: US-ASCII
       string: ok
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:12 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:01 GMT
 - request:
     method: get
     uri: http://127.0.0.1:3000/
@@ -78,9 +78,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 46fb01a1-4d6a-4ed7-90f8-9b1d8256e157
+      - d06abeab-8663-4884-9037-b3a5bdbcec3b
       X-Runtime:
-      - '0.004675'
+      - '0.005777'
       Connection:
       - close
       Server:
@@ -89,5 +89,5 @@ http_interactions:
       encoding: US-ASCII
       string: ok
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:12 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:01 GMT
 recorded_with: VCR 2.9.3

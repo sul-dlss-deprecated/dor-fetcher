@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 93933728-d152-4e2a-ab03-01c60c927ddf
+      - bbb7f1a2-c22f-4bc4-9fc3-ecfd417031b9
       X-Runtime:
-      - '0.012710'
+      - '0.014214'
       Connection:
       - close
       Server:
@@ -48,5 +48,5 @@ http_interactions:
         E. Stafford photographs, 1909-1933"},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":"TThe
         Bruce R. Craig Collection of the Revs Institutee"}],"counts":{"collections":4,"total_count":4}}'
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:13 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
 recorded_with: VCR 2.9.3

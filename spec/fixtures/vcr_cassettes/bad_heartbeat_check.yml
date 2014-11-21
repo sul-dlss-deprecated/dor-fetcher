@@ -19,7 +19,7 @@ http_interactions:
       message: Moved Permanently
     headers:
       Date:
-      - Fri, 21 Nov 2014 20:10:12 GMT
+      - Fri, 21 Nov 2014 23:08:02 GMT
       Server:
       - Apache
       Location:
@@ -46,7 +46,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:12 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:02 GMT
 - request:
     method: get
     uri: http://www-personal.umich.edu/~carrickr
@@ -66,9 +66,9 @@ http_interactions:
       message: Moved Permanently
     headers:
       Set-Cookie:
-      - PERSONALCOOKIE=R3382578549; path=/
+      - PERSONALCOOKIE=R1813984204; path=/
       Date:
-      - Fri, 21 Nov 2014 20:10:12 GMT
+      - Fri, 21 Nov 2014 23:08:02 GMT
       Server:
       - Apache
       Location:
@@ -95,7 +95,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:12 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:03 GMT
 - request:
     method: get
     uri: http://www-personal.umich.edu/~carrickr/
@@ -108,7 +108,7 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       Cookie:
-      - PERSONALCOOKIE=R3382578549
+      - PERSONALCOOKIE=R1813984204
       User-Agent:
       - Ruby
   response:
@@ -117,9 +117,9 @@ http_interactions:
       message: OK
     headers:
       Set-Cookie:
-      - PERSONALCOOKIE=R3382578549; path=/
+      - PERSONALCOOKIE=R1813984204; path=/
       Date:
-      - Fri, 21 Nov 2014 20:10:13 GMT
+      - Fri, 21 Nov 2014 23:08:03 GMT
       Server:
       - Apache
       Accept-Ranges:
@@ -135,5 +135,5 @@ http_interactions:
         />\r\n  <frame src=\"content.html\" />\r\n\r\n\r\n  <noframes>\r\n    <body>\r\n
         \     Noframes content...\r\n    </body>\r\n  </noframes>\r\n\r\n</frameset>\r\n\r\n\r\n</HTML>"
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:13 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
 recorded_with: VCR 2.9.3

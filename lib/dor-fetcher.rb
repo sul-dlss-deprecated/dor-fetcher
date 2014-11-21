@@ -19,7 +19,7 @@ module DorFetcher
     def initialize options = {}
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
-      @site = RestClient::Resource.new(@service_url, :timeout => nil, :open_timeout => nil)
+      @site = RestClient::Resource.new(@service_url)
 
       if not options[:skip_heartbeat]
         raise "DorFetcher::Client Error! No response from #{@service_url}" if not self.is_alive?
@@ -134,9 +134,10 @@ module DorFetcher
     #@return [Hash] Hash of all objects governed by the APO including    
     #pid/druid, title, date last modified, and count
     def query_api(base, druid, params)
-      url = "#{base}/#{druid}/#{add_params(params)}"
+      url = "#{@site}/#{base}/#{druid}/#{add_params(params)}"
       begin
-        resp = @site[url].get
+        #We need to use this method here for the longer timeout option
+        resp = RestClient::Request.execute(:method=> :get, :url=>url, :timeout=>90000)
       rescue
         raise "Connection Error with url #{url}"
       end

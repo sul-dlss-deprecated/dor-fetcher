@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - c9329a72-29cb-4241-925a-1b26849f62bb
+      - e4c885f6-dc0d-4d2e-ae90-debce28ee499
       X-Runtime:
-      - '0.019074'
+      - '0.019295'
       Connection:
       - close
       Server:
@@ -55,5 +55,5 @@ http_interactions:
         Palace BARC: 1954","catkey":"3051733"},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":"","catkey":"3051734"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex
         300 NASCAR Race: 1968","catkey":"3051735"}],"counts":{"collections":3,"adminpolicies":1,"items":8,"total_count":12}}'
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 20:10:13 GMT
+  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
 recorded_with: VCR 2.9.3
