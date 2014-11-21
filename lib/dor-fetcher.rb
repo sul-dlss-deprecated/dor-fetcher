@@ -19,7 +19,7 @@ module DorFetcher
     def initialize options = {}
       #TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
-      @site = RestClient::Resource.new(@service_url) 
+      @site = RestClient::Resource.new(@service_url, :timeout => nil, :open_timeout => nil)
 
       if not options[:skip_heartbeat]
         raise "DorFetcher::Client Error! No response from #{@service_url}" if not self.is_alive?

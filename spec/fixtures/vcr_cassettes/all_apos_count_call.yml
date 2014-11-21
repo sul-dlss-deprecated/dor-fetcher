@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 2e853287-b249-4634-95d3-053c8fff795b
+      - 2ed72ffe-95fe-4070-b3ab-8991e5d768a5
       X-Runtime:
-      - '0.011328'
+      - '0.012078'
       Connection:
       - close
       Server:
@@ -44,5 +44,5 @@ http_interactions:
       encoding: US-ASCII
       string: '2'
     http_version: 
-  recorded_at: Thu, 20 Nov 2014 23:47:11 GMT
+  recorded_at: Fri, 21 Nov 2014 20:10:13 GMT
 recorded_with: VCR 2.9.3
