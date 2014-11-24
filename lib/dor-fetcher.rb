@@ -137,7 +137,7 @@ module DorFetcher
       url = "#{@site}/#{base}/#{druid}/#{add_params(params)}"
       begin
         #We need to use this method here for the longer timeout option
-        resp = RestClient::Request.execute(:method=> :get, :url=>url, :timeout=>90000)
+        resp = RestClient::Request.execute(:method=> :get, :url=>url, :timeout=>90000000, :open_timeout=>90000000)
       rescue
         raise "Connection Error with url #{url}"
       end
