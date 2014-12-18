@@ -19,7 +19,7 @@ http_interactions:
       message: Moved Permanently
     headers:
       Date:
-      - Fri, 21 Nov 2014 23:08:02 GMT
+      - Thu, 18 Dec 2014 21:54:35 GMT
       Server:
       - Apache
       Location:
@@ -46,7 +46,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:02 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 - request:
     method: get
     uri: http://www-personal.umich.edu/~carrickr
@@ -68,7 +68,7 @@ http_interactions:
       Set-Cookie:
       - PERSONALCOOKIE=R1813984204; path=/
       Date:
-      - Fri, 21 Nov 2014 23:08:02 GMT
+      - Thu, 18 Dec 2014 21:54:36 GMT
       Server:
       - Apache
       Location:
@@ -95,7 +95,7 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:03 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 - request:
     method: get
     uri: http://www-personal.umich.edu/~carrickr/
@@ -119,7 +119,7 @@ http_interactions:
       Set-Cookie:
       - PERSONALCOOKIE=R1813984204; path=/
       Date:
-      - Fri, 21 Nov 2014 23:08:03 GMT
+      - Thu, 18 Dec 2014 21:54:36 GMT
       Server:
       - Apache
       Accept-Ranges:
@@ -135,5 +135,5 @@ http_interactions:
         />\r\n  <frame src=\"content.html\" />\r\n\r\n\r\n  <noframes>\r\n    <body>\r\n
         \     Noframes content...\r\n    </body>\r\n  </noframes>\r\n\r\n</frameset>\r\n\r\n\r\n</HTML>"
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 recorded_with: VCR 2.9.3
