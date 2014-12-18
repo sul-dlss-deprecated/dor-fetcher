@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/apos/druid:qv648vd4392?rows=0
+    uri: http://127.0.0.1:3000/apos?status=registereed
     body:
       encoding: US-ASCII
       string: ''
@@ -27,22 +27,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - ! '"c20ad4d76fe97759aa27a0c99bff6710"'
+      - ! '"86951eb0755f8ecb981a890af16ca0f4"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 4112c704-d1ea-4a4a-81fa-4501c6920cd4
+      - 174f66d4-fa7c-4d93-8af1-59c74bd7a19f
       X-Runtime:
-      - '0.009569'
+      - '0.009445'
       Connection:
       - close
       Server:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: '12'
+      string: ! '{"adminpolicies":[{"druid":"druid:qv648vd4392","latest_change":"2013-11-11T23:34:29Z","title":"The
+        Revs Institute for Automotive Research"},{"druid":"druid:vb546ms7107","latest_change":"2014-09-09T15:40:29Z","title":"Stafford
+        Photos"}],"counts":{"adminpolicies":2,"total_count":2}}'
     http_version: 
   recorded_at: Thu, 18 Dec 2014 21:54:38 GMT
 recorded_with: VCR 2.9.3

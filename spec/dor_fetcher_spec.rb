@@ -56,8 +56,8 @@ describe DorFetcher::Client do
     end
 
     it "it should only add supported params to a RESTful API Call" do
-      params = {:first_modified => 'foo', :last_modified=> 'bar', :fred => 'carl'}
-      expect(@df.add_params(params)).to eq("?first_modified=foo&last_modified=bar")
+      params = {:first_modified => 'foo', :last_modified=> 'bar', :fred => 'carl', :status=>'registered'}
+      expect(@df.add_params(params)).to eq("?first_modified=foo&last_modified=bar&status=registered")
     end
   
     it "it should properly add one parameter to a RESTful API Call" do
@@ -106,7 +106,13 @@ describe DorFetcher::Client do
         expect(@df.list_all_collections).to eq(expected_result)
       end
     end
-    
+
+    it "should return a list of all registered collections" do
+      VCR.use_cassette('all_registered_collection_call') do
+        expect(@df.list_registered_collections['counts']['total_count']).to eq(5)
+      end
+    end
+        
     it "should return a count of all collections in the digital repo" do
       VCR.use_cassette('all_collection_count_call') do
         expect(@df.total_collection_count).to eq(4)
@@ -119,7 +125,19 @@ describe DorFetcher::Client do
         expect(@df.get_apo('druid:qv648vd4392')).to eq(expected_result)
       end 
     end
-    
+ 
+    it "should not return a single registered collection if status=registered parameter not specified" do
+      VCR.use_cassette('single_unregistered_collection_call') do
+        expect(@df.get_collection('druid:aa000bb0000')['counts']['total_count']).to eq(0)
+      end 
+    end
+
+    it "should return a single registered collection if if status=registered parameter is specified" do
+      VCR.use_cassette('single_registered_collection_call') do
+        expect(@df.get_collection('druid:aa000bb0000',{:status=>'registered'})['counts']['total_count']).to eq(1)
+      end 
+    end
+           
     it "should return a count for the APO" do
       VCR.use_cassette('apo_objects_count_call') do
         expect(@df.get_count_for_apo('druid:qv648vd4392')).to eq(12)
@@ -132,7 +150,13 @@ describe DorFetcher::Client do
         expect(@df.list_all_apos).to eq(expected_result)
       end
     end
-    
+
+    it "should return a list of all registered apos" do
+      VCR.use_cassette('all_registered_apo_call') do
+        expect(@df.list_registered_apos['counts']['total_count']).to eq(2)
+      end
+    end
+        
     it "should return a count of all APOs in the digital repo" do
       VCR.use_cassette('all_apos_count_call') do
         expect(@df.total_apo_count).to eq(2)

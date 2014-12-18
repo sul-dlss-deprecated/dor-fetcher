@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/collections
+    uri: http://127.0.0.1:3000/collections?status=registered
     body:
       encoding: US-ASCII
       string: ''
@@ -27,26 +27,27 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - ! '"35f1caf7c5f7fa87a2db4aee990b5203"'
+      - ! '"71e88f6150d147e61f1086ef2dd91d42"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 47533571-1d7b-4d73-b311-472329d9f50e
+      - 704040cf-2877-4c62-9603-533bdce2009b
       X-Runtime:
-      - '0.009093'
+      - '0.010069'
       Connection:
       - close
       Server:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"collections":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":"The
+      string: ! '{"collections":[{"druid":"druid:aa000bb0000","latest_change":null,"title":"Only
+        Registered - Not Accessioned"},{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":"The
         Revs Institute for Automotive Research, Inc."},{"druid":"druid:wy149zp6932","latest_change":"2014-06-06T05:06:06Z","title":"The
         George Phillips Collection of the Revs Institute","catkey":"3051740"},{"druid":"druid:yg867hg1375","latest_change":"2013-11-11T23:34:29Z","title":"Francis
         E. Stafford photographs, 1909-1933"},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":"TThe
-        Bruce R. Craig Collection of the Revs Institutee"}],"counts":{"collections":4,"total_count":4}}'
+        Bruce R. Craig Collection of the Revs Institutee"}],"counts":{"collections":5,"total_count":5}}'
     http_version: 
   recorded_at: Thu, 18 Dec 2014 21:54:38 GMT
 recorded_with: VCR 2.9.3

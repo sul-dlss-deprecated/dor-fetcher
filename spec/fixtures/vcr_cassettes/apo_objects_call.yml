@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/apos/druid:qv648vd4392/
+    uri: http://127.0.0.1:3000/apos/druid:qv648vd4392
     body:
       encoding: US-ASCII
       string: ''
@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - e4c885f6-dc0d-4d2e-ae90-debce28ee499
+      - 2e3101c6-f479-4931-bf0b-0d09f9491309
       X-Runtime:
-      - '0.019295'
+      - '0.010844'
       Connection:
       - close
       Server:
@@ -55,5 +55,5 @@ http_interactions:
         Palace BARC: 1954","catkey":"3051733"},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":"","catkey":"3051734"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex
         300 NASCAR Race: 1968","catkey":"3051735"}],"counts":{"collections":3,"adminpolicies":1,"items":8,"total_count":12}}'
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:38 GMT
 recorded_with: VCR 2.9.3

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/collections/nt028fd5773/?rows=0
+    uri: http://127.0.0.1:3000/collections/nt028fd5773?rows=0
     body:
       encoding: US-ASCII
       string: ''
@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 35fd89e9-d915-4375-bfbb-17f79833c4c9
+      - 3864c749-91bb-4434-88e7-7cf2b9868c3f
       X-Runtime:
-      - '0.013730'
+      - '0.010731'
       Connection:
       - close
       Server:
@@ -44,5 +44,5 @@ http_interactions:
       encoding: US-ASCII
       string: '11'
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:38 GMT
 recorded_with: VCR 2.9.3

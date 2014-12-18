@@ -1,12 +1,13 @@
 require 'rest_client'
 require 'json'
+require 'addressable/uri'
 
 module DorFetcher
   
   class Client
     
-    @@supported_params = [:first_modified, :last_modified]
-    @@count_only_param = "?rows=0"
+    @@supported_params = [:first_modified, :last_modified, :count_only, :status]
+    @@count_only_param = "rows=0"
     @@default_service_url = 'http://127.0.0.1:3000'
     @@counts_key = 'counts'
     
@@ -60,13 +61,20 @@ module DorFetcher
       return query_api('collections', collection, add_count_only_param(params))
     end
   
-    #Get a Hash of all the collections in the digital repository 
+    #Get a Hash of all the collections in the digital repository that are accessioned
     #@return [Hash] Hash of all collections including pid/druid, title,  
     #date last modified, and count
     def list_all_collections
       return query_api('collections', '', {})
     end
-    
+ 
+    #Get a Hash of all the collections in the digital repository 
+    #@return [Hash] Hash of all collections including pid/druid, title,  
+    #date last modified, and count
+    def list_registered_collections
+      return query_api('collections', '', {:status=>'registered'})
+    end
+       
     #Get a Count of all the collections in the digital repository 
     #@return [Integer] Number of all collections
     def total_collection_count
@@ -91,13 +99,20 @@ module DorFetcher
       return query_api('apos', apo, add_count_only_param(params))
     end
   
-    #Get a Hash of all the APOs in the digital repository 
+    #Get a Hash of all the APOs in the digital repository that are accessioned 
     #@return [Hash] Hash of all APOs including pid/druid, title,  
     #date last modified, and count
     def list_all_apos
       return query_api('apos', '', {})
     end
-    
+
+    #Get a Hash of all the APOs in the digital repository that are registered
+    #@return [Hash] Hash of all APOs including pid/druid, title,  
+    #date last modified, and count
+    def list_registered_apos
+      return query_api('apos', '', {:status=>'registereed'})
+    end
+        
     #Get a Count of all the APOs in the digital repository 
     #@return [Integer] Number of all APOs
     def total_apo_count
@@ -134,7 +149,9 @@ module DorFetcher
     #@return [Hash] Hash of all objects governed by the APO including    
     #pid/druid, title, date last modified, and count
     def query_api(base, druid, params)
-      url = "#{@site}/#{base}/#{druid}/#{add_params(params)}"
+      url = "#{@site}/#{base}"
+      url +="/#{druid}" unless druid.nil? || druid.empty?
+      url +="#{add_params(params)}" unless params.nil? || params.empty?
       begin
         #We need to use this method here for the longer timeout option
         resp = RestClient::Request.execute(:method=> :get, :url=>url, :timeout=>90000000, :open_timeout=>90000000)
@@ -153,24 +170,12 @@ module DorFetcher
    #
    #@param input_params [Hash] {The existing parameters, eg time and tag}
    #@return [String] parameters in the Hash now formatted into a RESTful parameter string
-   def add_params(input_params)
-     args_string = ""
-  
-     #Handle Count Only
-     args_string << @@count_only_param if input_params[:count_only] == true
-  
-     #If we did not add in a rows=0 param, args_string will have a size of 
-     #zero
-     #If we did add in a rows=0 param, this will set count to greater than 
-     #zero
-     count = args_string.size
-     @@supported_params.each do |p|
-       operator = "?"
-       operator = "&" if count > 0
-       args_string << "#{operator}#{p.to_s}=#{input_params[p]}" if input_params[p] != nil
-       count += 1
-     end
-     return args_string
+   def add_params(input_params)  
+     input_params.delete_if {|key,value| !@@supported_params.include?(key)}
+     uri = Addressable::URI.new
+     uri.query_values=input_params
+     qs=uri.query.gsub("count_only=true",@@count_only_param)
+     return "?#{qs}"   
    end
     
     #Add the parameter so query_api knows only to get a count of the documents in solr

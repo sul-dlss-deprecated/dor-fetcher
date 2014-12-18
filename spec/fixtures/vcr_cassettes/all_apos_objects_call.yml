@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/apos//
+    uri: http://127.0.0.1:3000/apos
     body:
       encoding: US-ASCII
       string: ''
@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 21ef516a-27a9-4c0e-b83c-67c420840abb
+      - 4ab722ad-25f6-41ae-ac11-f40857c85b4a
       X-Runtime:
-      - '0.012508'
+      - '0.009160'
       Connection:
       - close
       Server:
@@ -46,5 +46,5 @@ http_interactions:
         Revs Institute for Automotive Research"},{"druid":"druid:vb546ms7107","latest_change":"2014-09-09T15:40:29Z","title":"Stafford
         Photos"}],"counts":{"adminpolicies":2,"total_count":2}}'
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:04 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:38 GMT
 recorded_with: VCR 2.9.3

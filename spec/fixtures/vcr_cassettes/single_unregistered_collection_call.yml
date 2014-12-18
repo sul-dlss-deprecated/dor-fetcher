@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/apos/druid:qv648vd4392?rows=0
+    uri: http://127.0.0.1:3000/collections/druid:aa000bb0000
     body:
       encoding: US-ASCII
       string: ''
@@ -27,22 +27,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - ! '"c20ad4d76fe97759aa27a0c99bff6710"'
+      - ! '"783cbf09e8789b277859cd27ff71f534"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 4112c704-d1ea-4a4a-81fa-4501c6920cd4
+      - 96e3f8ab-1f31-43c6-8537-ab2d50cfdbb7
       X-Runtime:
-      - '0.009569'
+      - '0.010465'
       Connection:
       - close
       Server:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: '12'
+      string: ! '{"counts":{"total_count":0}}'
     http_version: 
   recorded_at: Thu, 18 Dec 2014 21:54:38 GMT
 recorded_with: VCR 2.9.3

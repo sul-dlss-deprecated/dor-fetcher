@@ -33,9 +33,9 @@ http_interactions:
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - b93335f9-fad4-4d3b-aeb7-b4ab05147e75
+      - 2280faf8-1d4d-478c-a624-5dc3d444f33a
       X-Runtime:
-      - '0.005984'
+      - '0.004826'
       Connection:
       - close
       Server:
@@ -44,7 +44,7 @@ http_interactions:
       encoding: US-ASCII
       string: ok
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:01 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 - request:
     method: get
     uri: http://127.0.0.1:3000/about/version.json
@@ -72,22 +72,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - ! '"1807f8da7ef28ba9f7b6d1b6324e5a4d"'
+      - ! '"4b76a74949bf51678ee1986f3d982bf7"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Meta-Request-Version:
       - 0.3.4
       X-Request-Id:
-      - 76015169-547b-4853-b2a3-44a70d4a3cdb
+      - 9f4430d4-5725-4c83-b6cd-144fd2c762c5
       X-Runtime:
-      - '0.005979'
+      - '0.003990'
       Connection:
       - close
       Server:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"app_name":"DORFetcherService","rails_env":"development","version":"November-2014","last_restart":"n/a","last_deploy":"n/a"}'
+      string: ! '{"app_name":"DORFetcherService","rails_env":"development","version":"November-2014","last_restart":"n/a","last_deploy":"n/a","solr_url":"http://localhost:8983/solr/dev"}'
     http_version: 
-  recorded_at: Fri, 21 Nov 2014 23:08:01 GMT
+  recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 recorded_with: VCR 2.9.3
