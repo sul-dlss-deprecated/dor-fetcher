@@ -6,6 +6,8 @@
 
 This gem provides a basic wrapper for reaching the API of an instance of dor-fetcher-service: https://github.com/sul-dlss/dor-fetcher-service.  This ReadMe assumes your familiar with the API of dor-fetcher-service, its JSON return and are just looking to leverage that with this gem.  
 
+By default you will only get fully accessioned objects in your result set.  There is a parmeter you can specify to return all objects, but you cannot restrict these by date.
+
 == Using This Gem
 
 * Add dor-fetcher to your Gemlist and require it where appropriate.
@@ -24,6 +26,7 @@ This can be passed anywhere you see params listed as an argument.  Past them in 
 * :count_only => true This returns just a count of the results.  Defaults to false.
 * :first_modified => 'String_of_Time_In_ISO8601_Format' This sets the first datetime that the object was modified, will default to the start of POSIX Time (Thursday, 1 Jan 1970).
 * :last_modified => 'String_of_Time_In_ISO8601_Format' This sets the last datetime that the object was modified, will default to tomorrow.  
+* :status=>'registered'   This will return ALL objects, even those that are not accessioned.  If you leave this off, you will ONLY get accessioned objects.  If this parameter is set, you cannot use the first_modified and last_modified parameters, they will be ignored since they only apply to published dates.
 
 You do not both a :first_modified and a :last_modified, you can use one or both.  
 
