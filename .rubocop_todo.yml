@@ -97,49 +97,11 @@ Style/IndentationWidth:
   Exclude:
     - 'spec/dor_fetcher_spec.rb'
 
-# Offense count: 69
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MethodDefParentheses:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/MultilineOperationIndentation:
   Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/NegatedIf:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, MinBodyLength, SupportedStyles.
-Style/Next:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: IncludeSemanticChanges.
-Style/NonNilCheck:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/Not:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -152,40 +114,12 @@ Style/PredicateName:
   Exclude:
     - 'lib/dor-fetcher.rb'
 
-# Offense count: 17
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/SignalException:
   Exclude:
     - 'lib/dor-fetcher.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-    - 'spec/dor_fetcher_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
-# Offense count: 24
-# Cop supports --auto-correct.
-# Configuration parameters: MultiSpaceAllowedForOperators.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'lib/dor-fetcher.rb'
-    - 'spec/dor_fetcher_spec.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -204,31 +138,6 @@ Style/SpaceInsideBrackets:
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
 Style/SpaceInsideHashLiteralBraces:
   Enabled: false
-
-# Offense count: 77
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
-# Offense count: 5
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Exclude:
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'lib/dor-fetcher.rb'
-    - 'spec/dor_fetcher_spec.rb'
-    - 'spec/spec_helper.rb'
-
-# Offense count: 73
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'Rakefile'
-    - 'lib/dor-fetcher.rb'
-    - 'spec/dor_fetcher_spec.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

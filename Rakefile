@@ -1,4 +1,4 @@
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 
 require 'rake'
 require 'bundler'
@@ -11,19 +11,19 @@ begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
+  $stderr.puts 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
 
-task :default => :ci  
+task :default => :ci
 
-desc "run continuous integration suite (tests, coverage, docs)" 
+desc 'run continuous integration suite (tests, coverage, docs)'
 task :ci => [:rspec, :doc]
 
 task :spec => :rspec
 
 RSpec::Core::RakeTask.new(:rspec) do |spec|
-  spec.rspec_opts = ["-c", "-f progress", "--tty", "-r ./spec/spec_helper.rb"]
+  spec.rspec_opts = ['-c', '-f progress', '--tty', '-r ./spec/spec_helper.rb']
 end
 
 # Use yard to build docs
@@ -37,9 +37,8 @@ begin
     yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'Harvestdor Gem Documentation']
   end
 rescue LoadError
-  desc "Generate YARD Documentation"
+  desc 'Generate YARD Documentation'
   task :doc do
-    abort "Please install the YARD gem to generate rdoc."
+    abort 'Please install the YARD gem to generate rdoc.'
   end
-end  
-
+end
