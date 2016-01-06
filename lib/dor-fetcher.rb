@@ -3,13 +3,13 @@ require 'json'
 require 'addressable/uri'
 
 module DorFetcher
-
   class Client
-
     @@supported_params = [:first_modified, :last_modified, :count_only, :status]
     @@count_only_param = 'rows=0'
     @@default_service_url = 'http://127.0.0.1:3000'
     @@counts_key = 'counts'
+
+    attr_reader :service_url # Base URL this instance will run RESTful API calls against
 
     # Create a new instance of DorFetcher::Client
     # @param options [Hash] Currently supports :service_url and :skip_heartbeat.
@@ -21,10 +21,7 @@ module DorFetcher
       # TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
       @site = RestClient::Resource.new(@service_url)
-
-      unless options[:skip_heartbeat]
-        raise "DorFetcher::Client Error! No response from #{@service_url}" unless self.is_alive?
-      end
+      raise "DorFetcher::Client Error! No response from #{@service_url}" unless options[:skip_heartbeat] || self.is_alive?
     end
 
     # Return service info (rails env, version deployed, last restart and last deploy)
@@ -34,13 +31,12 @@ module DorFetcher
       JSON[resp]
     end
 
-    # Check to see if the dor-fetcher-service is responding to requests, this is a basic heart beat checker
+    # Check to see if the dor-fetcher-service is responding to requests, this is a basic heartbeat checker
     # @return [Boolean] True for a service that responds, False for a service that does not.
     def is_alive?
       resp = @site.get
       200.eql?(resp.code) && 'ok'.eql?(resp)
     end
-
 
     # Get a hash of all members of a collection and the collection itself
     #
@@ -52,8 +48,7 @@ module DorFetcher
       query_api('collections', collection, params)
     end
 
-    # Get the count of the number of items in a collection, including the
-    # collection object itself
+    # Get the count of the number of items in a collection, including the collection object itself
     # @param collection [String] we expect pid/druid
     # @param params [Hash] we expect :count_only or any of @@supported_params
     # @return [Integer] Number found
@@ -126,28 +121,22 @@ module DorFetcher
     # @return [Array] the array listing all druids in the supplied Hash
     def druid_array(response, params = {})
       return_list = []
-      j = response
-      j.keys.each do |key|
-        if key != @@counts_key
-          j[key].each do |item|
-            unless item['druid'].nil?
-              druid = item['druid'].downcase
-              druid.gsub!('druid:', '') if params[:no_prefix]
-              return_list << druid
-            end
-          end
+      response.each do |key, items|
+        next if key == @@counts_key
+        items.each do |item|
+          next if item['druid'].nil?
+          druid = item['druid'].downcase
+          return_list << (params[:no_prefix] ? druid.gsub('druid:', '') : druid)
         end
       end
       return_list
     end
+
     # Query a RESTful API and return the JSON result as a Hash
-    # @param base [String] The name of controller of the Rails App you wish to
-    # route to
-    # @param druid [String] The druid/pid of the object you wish to query,
-    # or empty string for no specific druid
+    # @param base [String] The name of controller of the Rails App you wish to route to
+    # @param druid [String] The druid/pid of the object you wish to query,or empty string for no specific druid
     # @param params [Hash] we expect :count_only or any of @@supported_params
-    # @return [Hash] Hash of all objects governed by the APO including
-    # pid/druid, title, date last modified, and count
+    # @return [Hash] Hash of all objects governed by the APO including pid/druid, title, date last modified, and count
     def query_api(base, druid, params)
       url = "#{@site}/#{base}"
       url += "/#{druid}" unless druid.nil? || druid.empty?
@@ -162,21 +151,20 @@ module DorFetcher
       # RestClient monkey patches its response so it looks like a string, but really isn't.
       # If you just dd resp.to_i, you'll get the HTML Code, normally 200, not the actually body text you want
       return resp[0..resp.size].to_i if params[:count_only] == true
-
       JSON[resp] # Convert the response JSON to a Ruby Hash
     end
 
-  # Transform a parameter hash into a RESTful API parameter format
-   #
-   # @param input_params [Hash] {The existing parameters, eg time and tag}
-   # @return [String] parameters in the Hash now formatted into a RESTful parameter string
-   def add_params(input_params)
-     input_params.delete_if {|key, value| !@@supported_params.include?(key)}
-     uri = Addressable::URI.new
-     uri.query_values = input_params
-     qs = uri.query.gsub('count_only=true', @@count_only_param)
-     "?#{qs}"
-   end
+    # Transform a parameter hash into a RESTful API parameter format
+    #
+    # @param input_params [Hash] {The existing parameters, eg time and tag}
+    # @return [String] parameters in the Hash now formatted into a RESTful parameter string
+    def add_params(input_params)
+      input_params.delete_if { |key, value| !@@supported_params.include?(key)}
+      uri = Addressable::URI.new
+      uri.query_values = input_params
+      qs = uri.query.gsub('count_only=true', @@count_only_param)
+      "?#{qs}"
+    end
 
     # Add the parameter so query_api knows only to get a count of the documents in solr
     #
@@ -186,13 +174,5 @@ module DorFetcher
       params.store(:count_only, true)
       params
     end
-
-    # Get the Base URL this instance will run RESTful API calls against
-    # @return [String] the url
-    def service_url
-      @service_url
-    end
-
   end
-
 end

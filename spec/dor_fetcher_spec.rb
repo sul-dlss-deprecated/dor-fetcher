@@ -8,13 +8,13 @@ describe DorFetcher::Client do
     end
 
     it 'should initialize by default with a URL point to http://127.0.0.1:3000' do
-        expect(@df.service_url).to eq('http://127.0.0.1:3000')
+      expect(@df.service_url).to eq('http://127.0.0.1:3000')
     end
 
     it 'should initialize to any URL you provide it with heartbeat skipped' do
-     url = 'http://wwww.test-url.com'
-     df = DorFetcher::Client.new(:service_url => url, :skip_heartbeat => true)
-     expect(df.service_url).to eq(url)
+      url = 'http://wwww.test-url.com'
+      df = DorFetcher::Client.new(:service_url => url, :skip_heartbeat => true)
+      expect(df.service_url).to eq(url)
     end
 
     it 'should be able to query the provided fetcher url service that is alive' do
@@ -179,6 +179,4 @@ describe DorFetcher::Client do
       end
     end
   end
-
-
 end
