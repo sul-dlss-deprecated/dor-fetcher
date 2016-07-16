@@ -34,7 +34,7 @@ describe DorFetcher::Client do
 
     it 'should fail to initialize when a bad url is provided' do
       VCR.use_cassette('bad_heartbeat_check') do
-        expect {DorFetcher::Client.new(:service_url => @bad_init_url)}.to raise_error
+        expect {DorFetcher::Client.new(:service_url => @bad_init_url)}.to raise_error RuntimeError
       end
     end
 
