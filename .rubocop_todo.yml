@@ -44,7 +44,6 @@ Style/ClassVars:
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
-    - 'test/**/*'
     - 'lib/dor-fetcher.rb'
 
 # Offense count: 1
