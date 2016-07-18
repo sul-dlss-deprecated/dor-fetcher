@@ -1,11 +1,9 @@
-require 'spec_helper'
-
 describe DorFetcher::Client do
+  before(:each) do
+    @df = DorFetcher::Client.new(:skip_heartbeat => true)
+  end
   describe 'Preparing input for RESTful API calls' do
-    before(:each) do
-      @df = DorFetcher::Client.new(:skip_heartbeat => true)
-      @bad_init_url = 'http://umich.edu/~carrickr'
-    end
+    let(:bad_init_url) { 'http://umich.edu/~carrickr' }
 
     it 'should initialize by default with a URL point to http://127.0.0.1:3000' do
       expect(@df.service_url).to eq('http://127.0.0.1:3000')
@@ -27,27 +25,25 @@ describe DorFetcher::Client do
     it 'should check to the service version info' do
       VCR.use_cassette('version_info') do
         df = DorFetcher::Client.new
-        version_info = df.service_info
-        expect(version_info['app_name']).to eq('DORFetcherService')
+        expect(df.service_info['app_name']).to eq('DORFetcherService')
       end
     end
 
     it 'should fail to initialize when a bad url is provided' do
       VCR.use_cassette('bad_heartbeat_check') do
-        expect {DorFetcher::Client.new(:service_url => @bad_init_url)}.to raise_error
+        expect { DorFetcher::Client.new(:service_url => bad_init_url) }.to raise_error RuntimeError
       end
     end
 
     it 'should detect when a fetcher url has stopped responding' do
       VCR.use_cassette('bad_heartbeat_check') do
-        df = DorFetcher::Client.new(:service_url => @bad_init_url, :skip_heartbeat => true)
+        df = DorFetcher::Client.new(:service_url => bad_init_url, :skip_heartbeat => true)
         expect(df.is_alive?).to eq(false)
       end
     end
 
     it 'should add only the count only parameter to an empty hash' do
-      params = {}
-      expect(@df.add_count_only_param(params)).to eq({:count_only => true})
+      expect(@df.add_count_only_param({})).to eq({:count_only => true})
     end
 
     it 'should add only the count only parameter to a hash with keys' do
@@ -83,10 +79,6 @@ describe DorFetcher::Client do
   end
 
   describe 'Calling RESTful API and processing output' do
-    before(:each) do
-      @df = DorFetcher::Client.new(:skip_heartbeat => true)
-    end
-
     it 'should return a Hash of all items in a collection and the collection object' do
       VCR.use_cassette('revs_collection_object_call') do
         expected_result = JSON['{"collections":[{"druid":"druid:nt028fd5773","latest_change":"2014-06-06T05:06:06Z","title":"The Revs Institute for Automotive Research, Inc."},{"druid":"druid:wy149zp6932","latest_change":"2014-06-06T05:06:06Z","title":"The George Phillips Collection of the Revs Institute","catkey":"3051740"},{"druid":"druid:yt502zj0924","latest_change":"2014-06-06T05:06:06Z","title":"TThe Bruce R. Craig Collection of the Revs Institutee"}],"items":[{"druid":"druid:bb001zc5754","latest_change":"2014-06-06T05:06:06Z","title":"French Grand Prix and 12 Hour Rheims: 1954","catkey":"3051728"},{"druid":"druid:bb004bn8654","latest_change":"2014-06-06T05:06:06Z","title":" Bryar 250 Trans-American: 1966","catkey":"3051729"},{"druid":"druid:bb013sq9803","latest_change":"2014-06-06T05:06:06Z","title":"Swedish Grand Prix: 1976","catkey":"3051730"},{"druid":"druid:bb014bd3784","latest_change":"2014-06-06T05:06:06Z","title":"Bridgehampton Double 500: 1964","catkey":"3051731"},{"druid":"druid:bb023nj3137","latest_change":"2014-06-06T05:06:06Z","title":"Snetterton Vanwall Trophy: 1958","catkey":"3051732"},{"druid":"druid:bb027yn4436","latest_change":"2014-06-06T05:06:06Z","title":"Crystal Palace BARC: 1954","catkey":"3051733"},{"druid":"druid:bb048rn5648","latest_change":"2014-06-06T05:06:06Z","title":"","catkey":"3051734"},{"druid":"druid:bb113tm9924","latest_change":"2014-06-06T05:06:06Z","title":"Permatex 300 NASCAR Race: 1968","catkey":"3051735"}],"counts":{"collections":3,"items":8,"total_count":11}}']
@@ -162,14 +154,9 @@ describe DorFetcher::Client do
         expect(@df.total_apo_count).to eq(2)
       end
     end
-
   end
 
   describe 'Query API' do
-    before(:each) do
-      @df = DorFetcher::Client.new(:skip_heartbeat => true)
-    end
-
     it 'should be able to return a count of objects governed by an APO bounded by datetime parameters' do
       druid = 'druid:qv648vd4392'
       base = 'apos'
