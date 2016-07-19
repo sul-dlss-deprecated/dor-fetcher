@@ -105,7 +105,7 @@ module DorFetcher
     # @return [Hash] Hash of all APOs including pid/druid, title,
     # date last modified, and count
     def list_registered_apos
-      query_api('apos', '', {:status => 'registereed'})
+      query_api('apos', '', {:status => 'registered'})
     end
 
     # Get a Count of all the APOs in the digital repository
