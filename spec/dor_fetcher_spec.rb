@@ -156,14 +156,27 @@ describe DorFetcher::Client do
     end
   end
 
-  describe 'Query API' do
+  describe '#query_api' do
+    let(:druid) { 'druid:qv648vd4392' }
+    let(:base) { 'apos' }
+    let(:params) { { :count_only => true, :first_modified => '2014-01-01T05:06:06Z', :last_modified => '2014-10-19T05:06:06Z' } }
+
     it 'should be able to return a count of objects governed by an APO bounded by datetime parameters' do
-      druid = 'druid:qv648vd4392'
-      base = 'apos'
-      params = {:count_only => true, :first_modified => '2014-01-01T05:06:06Z', :last_modified => '2014-10-19T05:06:06Z'}
       VCR.use_cassette('exercise_date_restrictions') do
         expect(@df.query_api(base, druid, params)).to eq(11)
       end
+    end
+
+    it 'does not swallow/obfuscate exceptions' do
+      allow(RestClient::Request).to receive(:execute).and_raise(NoMemoryError)
+      expect { @df.query_api(base, druid, params) }.to raise_error(NoMemoryError)
+      allow(RestClient::Request).to receive(:execute).and_raise(NoMethodError)
+      expect { @df.query_api(base, druid, params) }.to raise_error(NoMethodError)
+    end
+
+    it 'adds a warning for a RestClient::Exception' do
+      allow(RestClient::Request).to receive(:execute).and_raise(RestClient::Exception.new)
+      expect { @df.query_api(base, druid, params) }.to output.to_stderr.and raise_error(RestClient::Exception)
     end
   end
 end

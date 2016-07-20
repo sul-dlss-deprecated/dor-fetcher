@@ -132,20 +132,30 @@ module DorFetcher
       return_list
     end
 
-    # Query a RESTful API and return the JSON result as a Hash
-    # @param base [String] The name of controller of the Rails App you wish to route to
-    # @param druid [String] The druid/pid of the object you wish to query,or empty string for no specific druid
-    # @param params [Hash] we expect :count_only or any of @@supported_params
-    # @return [Hash] Hash of all objects governed by the APO including pid/druid, title, date last modified, and count
-    def query_api(base, druid, params)
+    # Synthesize URL from base, druid and params
+    # @see #query_api for args
+    # @return [String] URL
+    def query_url(base, druid, params)
       url = "#{@site}/#{base}"
       url += "/#{druid}" unless druid.nil? || druid.empty?
-      url += "#{add_params(params)}" unless params.nil? || params.empty?
+      url += add_params(params).to_s unless params.nil? || params.empty?
+      url
+    end
+
+    # Query a RESTful API and return the JSON result as a Hash
+    # @param base [String] The name of controller of the Rails App you wish to route to
+    # @param druid [String] The druid/pid of the object you wish to query, or empty string for no specific druid
+    # @param params [Hash] we expect :count_only or any of @@supported_params
+    # @option params [Hash] :count_only
+    # @return [Hash,Integer] All objects governed by the APO including pid/druid, title, date last modified, and count -- or just the count if :count_only
+    def query_api(base, druid, params)
+      url = query_url(base, druid, params)
       begin
-        # We need to use this method here for the longer timeout option
-        resp = RestClient::Request.execute(:method => :get, :url => url, :timeout => 90000000, :open_timeout => 90000000)
-      rescue
-        raise "Connection Error with url #{url}"
+        # We use RestClient::Request.execute here for the longer timeout option
+        resp = RestClient::Request.execute(:method => :get, :url => url, :timeout => 180)
+      rescue RestClient::Exception => e
+        warn "Connection Error with url #{url}: #{e.message}"
+        raise e
       end
 
       # RestClient monkey patches its response so it looks like a string, but really isn't.
