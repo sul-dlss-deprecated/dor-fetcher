@@ -12,16 +12,16 @@ module DorFetcher
     attr_reader :service_url # Base URL this instance will run RESTful API calls against
 
     # Create a new instance of DorFetcher::Client
-    # @param options [Hash] Currently supports :service_url and :skip_heartbeat.
-    # @param :service_url is the base url for API queries.  Defaults to http://127.0.0.1:3000
-    # @param :skip_heartbeat will tell the init to skip querying the :service_url and seeing if the API is responsive
+    # @param options [Hash]
+    # @option options [String] :service_url base url for API queries.  Default: http://127.0.0.1:3000
+    # @option options [Boolean] :skip_heartbeat skip querying :service_url to confirm API is responsive.  Default: false
     # @example
-    #    df = DorFetcher::Client.new({:service_url='http://SERVICEURL'})
+    #    df = DorFetcher::Client.new(:service_url => 'http://SERVICEURL')
     def initialize(options = {})
       # TODO: Check for a well formed URL and a 200 from the destination before just accepting this
       @service_url = options[:service_url] || @@default_service_url
       @site = RestClient::Resource.new(@service_url)
-      raise "DorFetcher::Client Error! No response from #{@service_url}" unless options[:skip_heartbeat] || self.is_alive?
+      raise "DorFetcher::Client Error! No response from #{@service_url}" unless options[:skip_heartbeat] || is_alive?
     end
 
     # Return service info (rails env, version deployed, last restart and last deploy)
@@ -42,45 +42,41 @@ module DorFetcher
     #
     # @param collection [String] we expect pid/druid
     # @param params [Hash] we expect :count_only or any of @@supported_params
-    # @return [Hash] Hash of all objects in the collection including
-    # pid/druid, title, date last modified, and count
+    # @return [Hash] Hash of all objects in the collection including: pid/druid, title, date last modified, and count
     def get_collection(collection, params = {})
       query_api('collections', collection, params)
     end
 
     # Get the count of the number of items in a collection, including the collection object itself
     # @param collection [String] we expect pid/druid
-    # @param params [Hash] we expect :count_only or any of @@supported_params
+    # @param params [Hash] any of @@supported_params
     # @return [Integer] Number found
     def get_count_for_collection(collection, params = {})
-      query_api('collections', collection, add_count_only_param(params))
+      query_api('collections', collection, params.merge!(:count_only => true))
     end
 
     # Get a Hash of all the collections in the digital repository that are accessioned
-    # @return [Hash] Hash of all collections including pid/druid, title,
-    # date last modified, and count
+    # @return [Hash] All collections including: pid/druid, title, date last modified, and count
     def list_all_collections
       query_api('collections', '', {})
     end
 
     # Get a Hash of all the collections in the digital repository
-    # @return [Hash] Hash of all collections including pid/druid, title,
-    # date last modified, and count
+    # @return [Hash] All registered collections including: pid/druid, title, date last modified, and count
     def list_registered_collections
-      query_api('collections', '', {:status => 'registered'})
+      query_api('collections', '', :status => 'registered')
     end
 
     # Get a Count of all the collections in the digital repository
     # @return [Integer] Number of all collections
     def total_collection_count
-      query_api('collections', '', {:count_only => true})
+      query_api('collections', '', :count_only => true)
     end
 
     # Get the APO and all objects governed by the APO
     # @param apo [String] pid/druid of the APO
     # @param params [Hash] we expect :count_only or any of @@supported_params
-    # @return [Hash] Hash of all objects governed by the APO including
-    # pid/druid, title, date last modified, and count
+    # @return [Hash] All objects governed by the APO including: pid/druid, title, date last modified, and count
     def get_apo(apo, params = {})
       query_api('apos', apo, params)
     end
@@ -91,34 +87,32 @@ module DorFetcher
     # @param params [Hash] we expect :count_only or any of @@supported_params
     # @return [Integer] Number found
     def get_count_for_apo(apo, params = {})
-      query_api('apos', apo, add_count_only_param(params))
+      query_api('apos', apo, params.merge!(:count_only => true))
     end
 
     # Get a Hash of all the APOs in the digital repository that are accessioned
-    # @return [Hash] Hash of all APOs including pid/druid, title,
-    # date last modified, and count
+    # @return [Hash] All APOs including: pid/druid, title, date last modified, and count
     def list_all_apos
       query_api('apos', '', {})
     end
 
     # Get a Hash of all the APOs in the digital repository that are registered
-    # @return [Hash] Hash of all APOs including pid/druid, title,
-    # date last modified, and count
+    # @return [Hash] All registered APOs including: pid/druid, title, date last modified, and count
     def list_registered_apos
-      query_api('apos', '', {:status => 'registered'})
+      query_api('apos', '', :status => 'registered')
     end
 
     # Get a Count of all the APOs in the digital repository
     # @return [Integer] Number of all APOs
     def total_apo_count
-      query_api('apos', '', {:count_only => true})
+      query_api('apos', '', :count_only => true)
     end
 
-    # Method to parse full Hash into an array containing only the druids
-    #
+    # Parses full Hash into an array containing only the druids
     # @param response [Hash] Hash as returned by query_api
-    # @param no_prefix [boolean] if true (default), remove the druid: prefix on all druids, if false, leave alone
-    # @return [Array] the array listing all druids in the supplied Hash
+    # @param params [Hash{Symbol=>Boolean}] options
+    # @option params [Boolean] :no_prefix if true (default), remove the 'druid:' prefix on all druids
+    # @return [Array{String}] all druids in the supplied Hash
     def druid_array(response, params = {})
       return_list = []
       response.each do |key, items|
@@ -165,24 +159,12 @@ module DorFetcher
     end
 
     # Transform a parameter hash into a RESTful API parameter format
-    #
-    # @param input_params [Hash] {The existing parameters, eg time and tag}
+    # @param input_params [Hash{Symbol=>Object}] The existing parameters, eg time and tag
     # @return [String] parameters in the Hash now formatted into a RESTful parameter string
     def add_params(input_params)
-      input_params.delete_if { |key, value| !@@supported_params.include?(key)}
       uri = Addressable::URI.new
-      uri.query_values = input_params
-      qs = uri.query.gsub('count_only=true', @@count_only_param)
-      "?#{qs}"
-    end
-
-    # Add the parameter so query_api knows only to get a count of the documents in solr
-    #
-    # @param params [Hash] {The existing parameters, eg time and tag}
-    # @return [Hash] the params Hash plus the key/value set :count_only=>true
-    def add_count_only_param(params)
-      params.store(:count_only, true)
-      params
+      uri.query_values = input_params.select { |key, _val| @@supported_params.include?(key) }
+      '?' + uri.query.gsub('count_only=true', @@count_only_param)
     end
   end
 end

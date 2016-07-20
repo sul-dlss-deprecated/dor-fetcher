@@ -42,27 +42,14 @@ describe DorFetcher::Client do
       end
     end
 
-    it 'should add only the count only parameter to an empty hash' do
-      expect(@df.add_count_only_param({})).to eq({:count_only => true})
-    end
-
-    it 'should add only the count only parameter to a hash with keys' do
-      params = {:first_modified => 'foo', :last_modified => 'bar'}
-      expect(@df.add_count_only_param(params)).to eq(params.merge!(count_only: true))
-    end
-
     it 'it should only add supported params to a RESTful API Call' do
-      params = {:first_modified => 'foo', :last_modified => 'bar', :fred => 'carl', :status => 'registered'}
+      params = { :first_modified => 'foo', :last_modified => 'bar', :fred => 'carl', :status => 'registered' }
       expect(@df.add_params(params)).to eq('?first_modified=foo&last_modified=bar&status=registered')
     end
 
     it 'it should properly add one parameter to a RESTful API Call' do
-      params = {:first_modified => 'foo'}
+      params = { :first_modified => 'foo' }
       expect(@df.add_params(params)).to eq('?first_modified=foo')
-    end
-
-    it 'it should properly translate :count_only=>true to rows=0' do
-      expect(@df.add_params(@df.add_count_only_param({}))).to eq('?rows=0')
     end
 
     it 'druid_array should take in JSON and return a list of just the druids' do
@@ -73,8 +60,8 @@ describe DorFetcher::Client do
 
     it 'druid_array should take in JSON and return a list of just the druids, stripping off druid prefix if requested' do
       input = JSON['{"collections":[{"druid":"DRUID:yg867hg1375","latest_change":"2013-11-11T23:34:29Z","title":"Francis E. Stafford photographs, 1909-1933"}],"items":[{"druid":"druid:jf275fd6276","latest_change":"2013-11-11T23:34:29Z","title":"Album A: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."},{"druid":"druid:nz353cp1092","latest_change":"2013-11-11T23:34:29Z","title":"Album E: Photographs of the Seventh Day Adventist Church missionaries in China"},{"druid":"druid:tc552kq0798","latest_change":"2013-11-11T23:34:29Z","title":"Album D: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."},{"druid":"druid:th998nk0722","latest_change":"2013-11-11T23:34:29Z","title":"Album C: Photographs of the Chinese Revolution of 1911 and the Shanghai Commercial Press"},{"druid":"druid:ww689vs6534","latest_change":"2013-11-11T23:34:29Z","title":"Album B: Photographs of Chinas natural landscapes, urban scenes, cultural landmarks, social customs, and people."}],"counts":{"collections":1,"items":5,"total_count":6}}']
-      expected_output = ['yg867hg1375', 'jf275fd6276', 'nz353cp1092', 'tc552kq0798', 'th998nk0722', 'ww689vs6534']
-      expect(@df.druid_array(input, {:no_prefix => true})).to eq(expected_output)
+      expected_output = %w(yg867hg1375 jf275fd6276 nz353cp1092 tc552kq0798 th998nk0722 ww689vs6534)
+      expect(@df.druid_array(input, :no_prefix => true)).to eq(expected_output)
     end
   end
 
@@ -126,7 +113,7 @@ describe DorFetcher::Client do
 
     it 'should return a single registered collection if if status=registered parameter is specified' do
       VCR.use_cassette('single_registered_collection_call') do
-        expect(@df.get_collection('druid:aa000bb0000', {:status => 'registered'})['counts']['total_count']).to eq(1)
+        expect(@df.get_collection('druid:aa000bb0000', :status => 'registered')['counts']['total_count']).to eq(1)
       end
     end
 
@@ -143,9 +130,12 @@ describe DorFetcher::Client do
       end
     end
 
+    let(:apos) { @df.list_registered_apos }
+
     it 'should return a list of all registered apos' do
       VCR.use_cassette('all_registered_apo_call') do
-        expect(@df.list_registered_apos['counts']['total_count']).to eq(2)
+        expect(apos['counts']['total_count']).to eq(2)
+        expect(apos['adminpolicies'].map { |x| x['druid'] }).to include('druid:qv648vd4392', 'druid:vb546ms7107')
       end
     end
 
