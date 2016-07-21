@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://127.0.0.1:3000/apos?status=registereed
+    uri: http://127.0.0.1:3000/apos?status=registered
     body:
       encoding: US-ASCII
       string: ''
