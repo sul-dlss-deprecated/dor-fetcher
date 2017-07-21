@@ -61,6 +61,12 @@ module DorFetcher
       query_api('collections', '', {})
     end
 
+    # Get a Hash of all the workflows in the digital repository
+    # @return [Hash] All workflows including: pid/druid, title, date last modified, and count
+    def list_all_workflows
+      query_api('workflows', '', {})
+    end
+
     # Get a Hash of all the collections in the digital repository
     # @return [Hash] All registered collections including: pid/druid, title, date last modified, and count
     def list_registered_collections

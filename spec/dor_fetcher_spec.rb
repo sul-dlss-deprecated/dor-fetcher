@@ -86,6 +86,13 @@ describe DorFetcher::Client do
       end
     end
 
+    it 'should return a hash of all workflows' do
+      expected_result = JSON['{"workflows":[{"druid":"druid:oo000oo0001","latest_change":"2016-11-11T23:34:29Z","title":"assemblyWF","catkey":null},{"druid":"druid:oo000oo0002","latest_change":"2016-12-11T23:34:29Z","title":"accessionWF","catkey":null}],"counts":{"workflows":2,"total_count":2}}']
+      VCR.use_cassette('all_workflow_objects_call') do
+        expect(@df.list_all_workflows).to eq(expected_result)
+      end
+    end
+
     it 'should return a list of all registered collections' do
       VCR.use_cassette('all_registered_collection_call') do
         expect(@df.list_registered_collections['counts']['total_count']).to eq(5)
