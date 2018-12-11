@@ -42,8 +42,8 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ok
-    http_version: 
+      string: 'default: PASSED Application is running (0s)'
+    http_version:
   recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 - request:
     method: get
@@ -87,7 +87,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ok
-    http_version: 
+      string: 'default: PASSED Application is running (0s)'
+    http_version:
   recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 recorded_with: VCR 2.9.3

@@ -35,7 +35,7 @@ module DorFetcher
     # @return [Boolean] True for a service that responds, False for a service that does not.
     def is_alive?
       resp = @site.get
-      200.eql?(resp.code) && 'ok'.eql?(resp)
+      200.eql?(resp.code) && /PASSED/.match?(resp.body)
     end
 
     # Get a hash of all members of a collection and the collection itself
