@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'dor-fetcher'
-  s.version     = '1.2.0'
+  s.version     = '1.3.0'
   s.date        = '2014-12-18'
   s.summary     = 'DorFetcher Gem'
   s.description = 'Wrapper for the Dor Fetcher Services RESTful API.'
