@@ -42,8 +42,8 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ok
-    http_version: 
+      string: 'default: PASSED Application is running (0s)'
+    http_version:
   recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 - request:
     method: get
@@ -88,6 +88,6 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! '{"app_name":"DORFetcherService","rails_env":"development","version":"November-2014","last_restart":"n/a","last_deploy":"n/a","solr_url":"http://localhost:8983/solr/dev"}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 18 Dec 2014 21:54:37 GMT
 recorded_with: VCR 2.9.3
